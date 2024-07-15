@@ -1,0 +1,47 @@
+<div class="card">
+</div>
+<div class="card-body">
+    <div>
+        <mat-toolbar color="primary">
+            <p>{{label}}</p>
+        </mat-toolbar>
+    </div>
+    <br>
+    <br>
+    <form [formGroup]="restaurantUpdateForm">
+        <div class="form-group row mb-2">
+            <div>
+                <div>
+                    <mat-form-field>
+                        <input matInput class="form-control" type="text" placeholder="Име на ресторан" formControlName="restaurantName"/>
+                        <mat-error *ngIf="restaurantUpdateForm.get('restaurantName').invalid && restaurantUpdateForm.get('restaurantName').touched">
+                            {{getErrorMessage(restaurantUpdateForm.get('restaurantName'))}}</mat-error>
+                    </mat-form-field>
+                </div>
+                <div> 
+                    <mat-form-field>
+                        <input matInput class="form-control" type="number" placeholder="Редослед" formControlName="order" value="dataSource?.order"/>
+                        <mat-error *ngIf="restaurantUpdateForm.get('order').invalid && restaurantUpdateForm.get('order').touched">
+                            {{getErrorMessage(restaurantUpdateForm.get('order'))}}</mat-error>                       
+                        <mat-error *ngIf="restaurantUpdateForm.get('order').hasError('negativeDuration') && (restaurantUpdateForm.get('order').dirty || restaurantUpdateForm.get('order').touched)">            
+                            Бројот мора да e позитивен</mat-error>
+                    </mat-form-field>
+                </div>
+
+                <div> 
+                    <mat-form-field >
+                        <input matInput class="form-control" type="number" placeholder="Учество за попуст" formControlName="participation" value="dataSource?.participation"/>
+                        <mat-error *ngIf="restaurantUpdateForm.get('participation').invalid && restaurantUpdateForm.get('participation').touched">
+                            {{getErrorMessage(restaurantUpdateForm.get('participation'))}}</mat-error>                       
+                        <mat-error *ngIf="restaurantUpdateForm.get('participation').hasError('negativeDuration') && (restaurantUpdateForm.get('participation').dirty || restaurantUpdateForm.get('participation').touched)">            
+                            Бројот мора да e позитивен</mat-error>
+                    </mat-form-field>
+                </div>
+            </div>
+        </div>
+    </form>
+    <mat-dialog-actions class="materialModalActions">
+        <button class="mat-raised-button mat-primary okModal" [disabled]="restaurantUpdateForm.invalid" (click)="save()">Зачувај</button>
+        <button class="mat-raised-button closeModal" (click)="close()">Затвори</button>
+    </mat-dialog-actions>
+</div>

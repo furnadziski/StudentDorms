@@ -1,0 +1,21 @@
+<div class="col-3">
+  <div *ngIf="editing">
+    <mat-form-field class="">
+      <mat-select #inlineSelectControl [(ngModel)]="value" (selectionChange)="onSelectChange($event)" name="value" >
+        <mat-option *ngFor="let option of options" [value]="option">{{ option.title }}</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <button mat-icon-button color="primary" (click)="save(value)">
+      <mat-icon>save</mat-icon>
+    </button>
+    <button mat-icon-button color="primary" (click)="cancel()">
+      <mat-icon>cancel</mat-icon>
+    </button>
+  </div>
+  <div *ngIf="!editing">
+    <span>{{viewValue}}</span>
+    <button mat-icon-button color="primary" class="edit-button global-edit action-button" (click)="edit(value)">
+      <mat-icon>edit</mat-icon>
+    </button>
+  </div>
+</div>

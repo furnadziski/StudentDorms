@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<License>
+  <Data>
+    <LicensedTo>Nextsense</LicensedTo>
+    <EmailTo>igor@nextsense.com</EmailTo>
+    <LicenseType>Developer OEM</LicenseType>
+    <LicenseNote>Limited to 1 developer, unlimited physical locations</LicenseNote>
+    <OrderID>160525040810</OrderID>
+    <UserID>22901</UserID>
+    <OEM>This is a redistributable license</OEM>
+    <Products>
+      <Product>Aspose.Total for .NET</Product>
+    </Products>
+    <EditionType>Enterprise</EditionType>
+    <SerialNumber>55c17551-ce70-4569-bed3-dc43023e7bc6</SerialNumber>
+    <SubscriptionExpiry>20170525</SubscriptionExpiry>
+    <LicenseVersion>3.0</LicenseVersion>
+    <LicenseInstructions>http://www.aspose.com/corporate/purchase/license-instructions.aspx</LicenseInstructions>
+  </Data>
+  <Signature>W1sy89C00kt/xHcqJVC0preZZgHYc53gjsuSvO481XxZSuqRsRgJnraR45wB+fvvDRJ4mqIxx0JCprztS03OO8lFgqlfSkhQNTZbmB0T9iRVXaNc3iTk4AET5kieJbr1lfjf4ULNPr01GC/Z2jI00vfOiOm6xQznc+8moLsf3ag=</Signature>
+</License>

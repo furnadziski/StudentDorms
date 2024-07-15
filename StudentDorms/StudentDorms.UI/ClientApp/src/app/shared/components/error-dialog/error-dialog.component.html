@@ -1,0 +1,13 @@
+<div class="table-wrapper errorModal">
+  <div class="modal-decoration"></div>
+  <div class="table-cell-modal">
+      <h1 mat-dialog-title>Настана грешка</h1>
+      <mat-dialog-content>{{data}}</mat-dialog-content>
+     <div class="modalImage">
+      <img src="../../../../assets/images/icons8-error.gif" />
+     </div>
+      <mat-dialog-actions>
+          <button mat-button class="mat-raised-button basic-button" mat-dialog-close (click)="close()">Во ред</button>   
+      </mat-dialog-actions>
+  </div>
+</div>

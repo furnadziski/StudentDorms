@@ -1,0 +1,51 @@
+<div class="menuLogo">
+  <div *ngIf="isExpanded">
+    Student <br> Dorms
+  </div>
+  <div *ngIf="!isExpanded" class="closedMenuLogo">
+    Student <br> Dorms
+  </div>
+</div>
+<section [class.sidenav]="isExpanded" class="sidenav-margin">
+
+  <div class="toggle">
+    <!-- <mat-icon (click)="toggleMenu.emit(null)">
+      {{ isExpanded ? "keyboard_backspace" : "dehaze" }}
+    </mat-icon> -->
+    <div (click)="toggleMenu.emit(null)">
+      <div *ngIf="isExpanded">
+        <!-- SVG for expanded state -->
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50" class="closeMenu">
+          <path
+            d="M 9.15625 6.3125 L 6.3125 9.15625 L 22.15625 25 L 6.21875 40.96875 L 9.03125 43.78125 L 25 27.84375 L 40.9375 43.78125 L 43.78125 40.9375 L 27.84375 25 L 43.6875 9.15625 L 40.84375 6.3125 L 25 22.15625 Z" />
+        </svg>
+      </div>
+      <div *ngIf="!isExpanded">
+        <!-- SVG for collapsed state -->
+        <svg class="openMenu" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M3 6H21V8H3V6Z" fill="currentColor" />
+          <path d="M3 11H21V13H3V11Z" fill="currentColor" />
+          <path d="M3 16H21V18H3V16Z" fill="currentColor" />
+        </svg>
+      </div>
+    </div>
+
+  </div>
+
+  <mat-list class="nav" *ngFor="let route of routeLinks">
+    <a mat-list-item routerLinkActive="active-link" class="hover" [routerLink]="route.link"
+      *ngIf="route.name">
+        <mat-icon [matTooltip]="!isExpanded ? route.title : null" matTooltipPosition="right" class="nav-icon">
+          {{route.icon}}
+        </mat-icon>
+      <p matLine *ngIf="isExpanded">{{ route.title }}</p>
+    </a>
+  </mat-list>
+
+  <div class="versionControl">
+    <div class="box">
+      <p>© Finki</p>
+      <p>v1.00</p>
+    </div>
+  </div>
+</section>

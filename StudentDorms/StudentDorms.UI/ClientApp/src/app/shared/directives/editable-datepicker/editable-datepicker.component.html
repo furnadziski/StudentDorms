@@ -1,0 +1,27 @@
+<div>
+  <div *ngIf="!edit" class="no-editable-input">
+      <span tabindex="0">{{value | date:
+          'dd.MM.yyyy'}}</span>
+          <button mat-icon-button color="primary" class="edit-button global-edit action-button" (click)="editValue(value)">
+            <mat-icon>edit</mat-icon>
+          </button>
+  </div>
+  <div *ngIf="edit" class="editable-input">
+      <div class="datepicker-wrapper">
+          <mat-form-field>
+              <input #inlineEditDatePickerControl matInput [matDatepicker]="datepicker" [min] = "min" [max] = "max" [(ngModel)]="value"
+                  [required]="required" [name]="value"/>
+              <mat-datepicker-toggle matSuffix [for]="datepicker"></mat-datepicker-toggle>
+              <mat-datepicker #datepicker></mat-datepicker>
+          </mat-form-field>
+      </div>
+      <div class="action-butons">
+        <button mat-icon-button color="primary" (click)="save(value)">
+          <mat-icon>save</mat-icon>
+        </button>
+        <button mat-icon-button color="primary" (click)="cancel()">
+          <mat-icon>cancel</mat-icon>
+        </button>
+      </div>
+  </div>
+</div>

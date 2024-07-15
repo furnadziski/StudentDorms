@@ -1,0 +1,20 @@
+<div style="width: 200px !important;" *ngIf="!edit" class="no-editable-input">
+  <span class="editable-value"> {{value}} </span>
+  <button mat-icon-button color="primary" class="edit-button global-edit action-button" (click)="editValue(value)">
+    <mat-icon>edit</mat-icon>
+  </button>
+</div>
+
+<div style="width: 200px !important;" *ngIf="edit" class="editable-input">
+  <input matInput *ngIf="inputType === 'number'" #inlineEditControl [type]="inputType" [min]="min" [max]="max"
+    [required]="required" [name]="value"  [(ngModel)]="value" [disabled]="disabled" />
+  <input mat-input *ngIf="inputType !== 'number'" #inlineEditControl [required]="required" [name]="value" 
+    [(ngModel)]="value" [disabled]="disabled" />
+
+  <button mat-icon-button color="primary" (click)="save(value)">
+    <mat-icon>save</mat-icon>
+  </button>
+  <button mat-icon-button color="primary" (click)="cancel()">
+    <mat-icon>cancel</mat-icon>
+  </button>
+</div>

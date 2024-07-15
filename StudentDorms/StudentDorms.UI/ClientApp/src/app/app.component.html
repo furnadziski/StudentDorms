@@ -1,0 +1,14 @@
+TEST
+<block-ui>
+  <app-header></app-header>
+  <mat-sidenav-container autosize >
+    <mat-sidenav #sidenav fixedInViewport="true" mode="side" opened="{{ isExpanded }}">
+      <app-nav-menu (toggleMenu)="toggleMenu()" [isExpanded]="isExpanded"></app-nav-menu>
+    </mat-sidenav>
+    <mat-sidenav-content [style.margin-left.px]="!isExpanded ? 80 : 250">
+      <div class="content-container">
+        <router-outlet></router-outlet>
+      </div>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+</block-ui>

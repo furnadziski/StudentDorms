@@ -1,0 +1,8 @@
+<nav mat-tab-nav-bar *ngIf="routeLinks !== undefined && routeLinks !== null && routeLinks.length > 0">
+  <span *ngFor="let link of routeLinks; let i = index">
+    <!-- <a mat-tab-link *ngIf="link.name | checkFieldPermission" routerLink='{{link.routerLink}}' (click)="setActiveTab(i)"
+      routerLinkActive="{{link.routerLinkActive}}" [active]='link.isActive'>{{link.title}}</a> -->
+      <a mat-tab-link routerLink='{{link.routerLink}}' (click)="setActiveTab(i)"
+      routerLinkActive="{{link.routerLinkActive}}" [active]='link.isActive'>{{link.title}}</a>
+  </span>
+</nav>
