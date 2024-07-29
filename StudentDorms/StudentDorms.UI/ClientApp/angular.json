@@ -36,7 +36,6 @@
             "styles": [
               "./node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css",
               "node_modules/igniteui-angular/styles/igniteui-angular.css",
-              "./node_modules/angular-calendar/css/angular-calendar.css",
               "src/styles.scss"
             ],
             "scripts": [ "node_modules/hammerjs/hammer.min.js" ]
@@ -106,7 +105,6 @@
             ],
             "styles": [
               "./node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css",
-              "./node_modules/angular-calendar/css/angular-calendar.css",
               "src/styles.scss"
             ],
             "scripts": []

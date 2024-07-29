@@ -17,7 +17,6 @@ import { GetDateFromMonthPipe } from './pipes/get-date-from-month.pipe'; // Impo
 import { UnAuthorizedComponent } from './error-handlers/un-authorized.component';
 import { ConfirmationDialogComponent } from './dialogs/confirmation-dialog.component';
 import { TabsComponent } from './components/tabs/tabs.component';
-import { AngularEditorModule } from '@kolkov/angular-editor';
 import { GridModule } from '@syncfusion/ej2-angular-grids';
 import { MAT_DIALOG_DATA, MatDialog, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 
@@ -35,7 +34,7 @@ import { MAT_DIALOG_DATA, MatDialog, MatDialogModule, MatDialogRef } from '@angu
     ConfirmationDialogComponent,
     TabsComponent
   ],
-    imports: [CommonModule, MaterialModule, RouterModule, FormsModule, MatDatepickerModule, ReactiveFormsModule, GridModule, AngularEditorModule,MatDialogModule],
+    imports: [CommonModule, MaterialModule, RouterModule, FormsModule, MatDatepickerModule, ReactiveFormsModule, GridModule,MatDialogModule],
   exports: [
     NavMenuComponent,
     MaterialModule,
@@ -48,8 +47,7 @@ import { MAT_DIALOG_DATA, MatDialog, MatDialogModule, MatDialogRef } from '@angu
     GetDateFromMonthPipe,
     UnAuthorizedComponent,
     TabsComponent,
-    ConfirmationDialogComponent,
-    AngularEditorModule
+    ConfirmationDialogComponent
   ],
   providers: [
     SharedService, UtilsService, FormsModule, NgModel,MatDialog

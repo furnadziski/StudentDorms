@@ -8,7 +8,6 @@ import { ErrorStatusCodeEnum } from "../models/error-status-code-enum";
 import { ErrorDialogComponent } from "../components/error-dialog/error-dialog.component";
 import { MatDialog } from "@angular/material/dialog";
 import { throwError } from "rxjs";
-import { SessionStorageService } from "./session-storage.service";
 import { ErrorModel } from "../models/shared/error.model";
 
 @Injectable({
@@ -21,8 +20,7 @@ export class UtilsService {
 
   constructor(private http: HttpClient,
               private router: Router,
-              private dialog: MatDialog,
-              private _sessionStorageService: SessionStorageService) { 
+              private dialog: MatDialog) { 
   }
 
   handleError(err: HttpErrorResponse, status: number) {
@@ -43,7 +41,6 @@ export class UtilsService {
             break;
           }
           case ErrorStatusCodeEnum.TokenExpired: {
-            this._sessionStorageService.removeAccessToken();
             location.href = "/Home/Index";
             break;
           }

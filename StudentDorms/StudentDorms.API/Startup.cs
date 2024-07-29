@@ -40,7 +40,7 @@ namespace StudentDorms.API
             services.AddCors(options => options.AddPolicy("CorsPolicy",
              builder =>
              {
-                 builder.WithOrigins("http://coms.test")
+                 builder.WithOrigins("http://student-dorms.test")
                          .AllowAnyMethod()
                          .AllowAnyHeader()
                          .AllowCredentials();

@@ -1,5 +1,4 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { SessionStorageService } from '../../services/session-storage.service';
 
 @Component({
   selector: 'app-header',
@@ -13,7 +12,6 @@ export class HeaderComponent implements OnInit {
   user: any;
 
   constructor(
-    private sessionStorageService: SessionStorageService
   ) { }
 
   ngOnInit(): void {
@@ -21,12 +19,12 @@ export class HeaderComponent implements OnInit {
   }
 
   getLoggedUser(){
-    this.user = this.sessionStorageService.getUser();
+    //this.user = this.sessionStorageService.getUser();
   }
 
   refreshUser(){
-    this.sessionStorageService.removeUser();
-    this.saveSuccess.emit();
+    // this.sessionStorageService.removeUser();
+    // this.saveSuccess.emit();
   }
 
   toggleUserInfo() {

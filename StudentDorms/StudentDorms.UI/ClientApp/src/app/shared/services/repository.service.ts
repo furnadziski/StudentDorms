@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import * as $ from 'jquery';
 import { Observable, catchError, tap } from 'rxjs';
-import { SessionStorageService } from './session-storage.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { UtilsService } from './utils-service';
 import { BlockUI, NgBlockUI } from 'ng-block-ui';
@@ -12,7 +11,7 @@ export class RepositoryService {
 
   @BlockUI() blockUI: NgBlockUI;
 
-  constructor(private _sessionStorageService: SessionStorageService,
+  constructor(
     private _http: HttpClient,
     private _utils: UtilsService
   ) { }
@@ -73,7 +72,7 @@ ajaxCall(url: string, dataForSend: any, method: string, local: boolean = false):
         method = "POST";
 
     if(method == "GET"){
-        return this._http.get<any>("http://api-coms.test/" + url, { params: dataForSend }).pipe(
+        return this._http.get<any>("http://api-student-dorms.test.test/" + url, { params: dataForSend }).pipe(
             tap(data => {
                 this.blockUIChangeState();
                 return data;
@@ -85,7 +84,7 @@ ajaxCall(url: string, dataForSend: any, method: string, local: boolean = false):
         );
     }
     else if(method == "POST"){
-        return this._http.post<any>("http://api-coms.test/" + url, dataForSend).pipe(
+        return this._http.post<any>("http://api-student-dorms.test/" + url, dataForSend).pipe(
             tap(data => {
                 this.blockUIChangeState();
                 return data;
