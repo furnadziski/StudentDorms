@@ -2,14 +2,14 @@
 using StudentDorms.Data.Context;
 using Microsoft.EntityFrameworkCore;
 
-namespace CoMS.NUnitTesting.Configuration
+namespace StudentDorms.NUnitTesting.Configuration
 {
     public static class ConfigureDependencies
     {
         public static DatabaseContext GetDbContext()
         {
             var options = new DbContextOptionsBuilder<DatabaseContext>()
-            .UseSqlServer("data source=dri-dev;initial catalog=COMS;persist security info=True;user id=sa;password=P@ssw0rd;MultipleActiveResultSets=True;")
+            .UseSqlServer("data source=localhost\\SQLEXPRESS;initial catalog=StudentDorms;persist security info=True;Integrated Security=True;MultipleActiveResultSets=True;")
                 .Options;
             var dbContext = new DatabaseContext(options);
             return dbContext;

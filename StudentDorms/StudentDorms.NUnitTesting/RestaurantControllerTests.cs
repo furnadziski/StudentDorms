@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 using static StudentDorms.Data.Interfaces.IProcedureRepository;
 using StudentDorms.Models.GridModels;
 
-namespace CoMS.NUnitTesting
+namespace StudentDorms.NUnitTesting
 {
     public class RestaurantControllerTests
     {

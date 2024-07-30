@@ -41,7 +41,7 @@ namespace StudentDorms.Services.Implementations
             return result;
             //if (restaurantSearchModel == null)
             //{
-            //    throw new COMSException("Моделот не постои!");
+            //    throw new StudentDormsException("Моделот не постои!");
             //}
             //var parameters = new List<SqlParameter>();
             //parameters.Add(new SqlParameter("@TotalItems", SqlDbType.Int) { Direction = ParameterDirection.Output });

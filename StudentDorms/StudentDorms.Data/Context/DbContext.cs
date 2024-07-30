@@ -19,6 +19,9 @@ namespace StudentDorms.Data.Context
         public DbSet<WeeklyMeal> WeeklyMeals { get; set;}
         public DbSet<AnnualAccommodation> AnnualAccommodations { get; set;}
         public DbSet<AnnualAccommodationUser> AnnualAccommodationUsers { get; set;}
+        public DbSet<UserGridModel> UserGridModel { get; set;}
+
+
 
 
 
@@ -45,6 +48,7 @@ namespace StudentDorms.Data.Context
           
             modelBuilder.Entity<Restaurant>().ToTable("Restaurants", "dbo");
             modelBuilder.Entity<RestaurantGridModel>().HasNoKey();
+            modelBuilder.Entity<UserGridModel>().HasNoKey();
 
 
             modelBuilder.Entity<Block>().ToTable("Blocks","config");
