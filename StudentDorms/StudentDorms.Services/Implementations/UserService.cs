@@ -1,9 +1,13 @@
 ﻿using Microsoft.Data.SqlClient;
+using StudentDorms.AutoMapper;
 using StudentDorms.Common.Exceptions;
 using StudentDorms.Data.Interfaces;
+using StudentDorms.Domain.Config;
 using StudentDorms.Models.Base;
+using StudentDorms.Models.CreateUpdateModels;
 using StudentDorms.Models.GridModels;
 using StudentDorms.Models.SearchModels;
+using StudentDorms.Models.ViewModels;
 using StudentDorms.Services.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -18,11 +22,12 @@ namespace StudentDorms.Services.Implementations
    public class UserService : IUserService
     {
         private readonly IProcedureRepository<UserGridModel> _procedureRepositoryUser;
- 
-        public UserService(IProcedureRepository<UserGridModel> procedureRepositoryUser)
+        private readonly IUserRepository _userRepository;
+
+        public UserService(IProcedureRepository<UserGridModel> procedureRepositoryUser, IUserRepository userRepository)
         {
             _procedureRepositoryUser = procedureRepositoryUser;
-            
+            _userRepository = userRepository;
         }
         public SearchResult<UserGridModel> GetUsersForGrid(UserSearchModel userSearchModel)
         {
@@ -50,7 +55,52 @@ namespace StudentDorms.Services.Implementations
             return result;
         }
 
-       
+        public void CreateUser(UserCreateUpdateModel userCreateUpdateModel)
+        {
+            if (userCreateUpdateModel == null)
+            {
+                throw new StudentDormsException("Моделот не смее да содржи null вредност");
+            }
+
+            var user = userCreateUpdateModel.ToDomain<User, UserCreateUpdateModel>();
+           
+            user.CreatedBy = "admin";
+            user.DateCreated = DateTime.Now;
+            user.ModifiedBy = "admin";
+            user.DateModified = DateTime.Now;
+
+            _userRepository.Create(user);
+        }
+        public void UpdateUser(UserCreateUpdateModel userCreateUpdateModel)
+        {
+            if (userCreateUpdateModel == null)
+            {
+                throw new StudentDormsException("Моделот не смее да биде null ");
+            }
+
+
+            var user = _userRepository.GetUserWithRolesById(userCreateUpdateModel.Id);
+            if (user == null)
+            {
+                throw new StudentDormsException("Не постои запис за корисник во база");
+            }
+
+            //var ur = userCreateUpdateModel.Roles.ToDomain<UserRole, DropdownViewModel<int>>();
+            var usr = userCreateUpdateModel.ToDomain<User, UserCreateUpdateModel>();
+
+            user.FirstName = userCreateUpdateModel.FirstName;
+            user.LastName = userCreateUpdateModel.LastName;
+            user.Email = userCreateUpdateModel.Email;
+            user.GenderId = userCreateUpdateModel.GenderId;
+            user.UserRoles = usr.UserRoles;
+            user.IsActive = userCreateUpdateModel.IsActive;
+           
+            user.ModifiedBy = "admin";
+            user.DateModified = DateTime.Now;
+                        
+            _userRepository.Update(user);
+        }
+
     }
 }
 

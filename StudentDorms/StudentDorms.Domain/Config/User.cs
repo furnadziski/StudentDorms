@@ -35,13 +35,13 @@ namespace StudentDorms.Domain.Config
         public string Email { get; set; }
 
         /// <summary>
-        /// Надворешен клуч до полот на овој узер
+        /// Надворешен клуч до полот на овој корисник
         /// </summary>
 
-        public int GenderId{ get; set; }
+        public int GenderId { get; set; }
 
         /// <summary>
-        /// Полот на узерот
+        /// Полот на корисникот
         /// </summary>
         [ForeignKey("GenderId")]
         public virtual Gender Gender { get; set; }
@@ -54,17 +54,12 @@ namespace StudentDorms.Domain.Config
         /// <summary>
         /// Листа на улоги за корисник
         /// </summary>
-       public IList<UserRole> UserRoles { get; set; }
+        public IList<UserRole> UserRoles { get; set; }
 
         /// <summary>
         /// Листа на годишно сместување за корисник
         /// </summary>
         public IList<AnnualAccommodationUser> AnnualAccommodationUsers { get; set; }
-
-
-
-
-
 
     }
 }

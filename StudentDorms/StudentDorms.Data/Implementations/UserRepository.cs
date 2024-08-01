@@ -1,4 +1,5 @@
-﻿using StudentDorms.Data.Context;
+﻿using Microsoft.EntityFrameworkCore;
+using StudentDorms.Data.Context;
 using StudentDorms.Data.Interfaces;
 using StudentDorms.Domain.Config;
 using System;
@@ -14,6 +15,16 @@ namespace StudentDorms.Data.Implementations
         public UserRepository(DatabaseContext context) : base(context)
         {
 
+        }
+
+        public User GetUserWithRolesById(int id)
+        {
+            return DbSet
+                .Include(x => x.Gender)
+                .Include(x => x.UserRoles)
+                .ThenInclude(x => x.Role)
+                .Where(x => x.Id == id)
+                .FirstOrDefault();
         }
     }
 }

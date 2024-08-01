@@ -13,7 +13,11 @@ namespace StudentDorms.Data.Interfaces
     /// </summary>
     public interface IUserRepository : IGenericRepository<User>
     {
-  
-
+        /// <summary>
+        /// Метод кој враќа корисник со улоги
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        User GetUserWithRolesById(int id);
     }
 }

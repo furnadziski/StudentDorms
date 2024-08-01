@@ -12,7 +12,7 @@ namespace StudentDorms.Domain.Config
     /// <summary>
     /// Класа во која се чуваат информации за улогите на корисникот
     /// </summary>
-    public class UserRole : BaseEntity<int>
+    public class UserRole
     {
         /// <summary>
         /// Надворешен клуч до профилот на корисникот

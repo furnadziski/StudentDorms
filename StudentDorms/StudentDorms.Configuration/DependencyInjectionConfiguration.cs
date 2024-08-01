@@ -38,7 +38,7 @@ namespace StudentDorms.Configuration
             var databaseConfig = configuration["Database:ConnectionString"];
             services.AddDbContext<DatabaseContext>(options =>
                 options.UseSqlServer(databaseConfig
-                ));
+                ), ServiceLifetime.Scoped);
         }
     }
 }

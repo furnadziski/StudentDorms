@@ -55,11 +55,11 @@ namespace StudentDorms.Data.Context
             modelBuilder.Entity<Gender>().ToTable("Genders","config");
             modelBuilder.Entity<Meal>().ToTable("Meals","config");
             modelBuilder.Entity<MealCategory>().ToTable("MealCategories","config");
-            modelBuilder.Entity<Role>().ToTable("Roles","config");
+            modelBuilder.Entity<Role>().ToTable("Roles","config").HasMany(x => x.UserRoles);
             modelBuilder.Entity<Room>().ToTable("Rooms","config");
             modelBuilder.Entity<StudentDorm>().ToTable("StudentDorms","config");
-            modelBuilder.Entity<User>().ToTable("Users","config");
-            modelBuilder.Entity<UserRole>().ToTable("UserRoles","config");
+            modelBuilder.Entity<User>().ToTable("Users","config").HasMany(x => x.UserRoles);
+            modelBuilder.Entity<UserRole>().ToTable("UserRoles","config").HasOne(x => x.User);
             modelBuilder.Entity<WeeklyMeal>().ToTable("WeeklyMeals","meal");
             modelBuilder.Entity<AnnualAccommodation>().ToTable("AnnualAccommodations", "accommodations");
             modelBuilder.Entity<AnnualAccommodationUser>().ToTable("AnnualAccommodationUsers", "accommodations");

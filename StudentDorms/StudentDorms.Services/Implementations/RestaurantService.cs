@@ -65,12 +65,12 @@ namespace StudentDorms.Services.Implementations
                 throw new StudentDormsException("Моделот не смее да содржи null вредност");
             }
 
-            var restaurant = restaurantCreateUpdateModel.ToDomain<Restaurant, RestaurantCreateUpdateModel>();
-            restaurant.CreatedBy = "gorazdn";
-            restaurant.DateCreated = DateTime.Now;
-            restaurant.ModifiedBy = "gorazdn";
-            restaurant.DateModified = DateTime.Now;
-            _restaurantRepository.Create(restaurant);
+            //var restaurant = restaurantCreateUpdateModel.ToDomain<Restaurant, UserCreateUpdateModel>();
+            //restaurant.CreatedBy = "gorazdn";
+            //restaurant.DateCreated = DateTime.Now;
+            //restaurant.ModifiedBy = "gorazdn";
+            //restaurant.DateModified = DateTime.Now;
+            //_restaurantRepository.Create(restaurant);
         }
 
         public void UpdateRestaurant(RestaurantCreateUpdateModel restaurantUpdateModel)
