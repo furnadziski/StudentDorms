@@ -85,7 +85,7 @@ namespace StudentDorms.Services.Implementations
                 throw new StudentDormsException("Не постои запис за корисник во база");
             }
 
-            //var ur = userCreateUpdateModel.Roles.ToDomain<UserRole, DropdownViewModel<int>>();
+            
             var usr = userCreateUpdateModel.ToDomain<User, UserCreateUpdateModel>();
 
             user.FirstName = userCreateUpdateModel.FirstName;

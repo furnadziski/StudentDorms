@@ -19,12 +19,18 @@ namespace StudentDorms.Configuration
             services.AddScoped<ISharedService, SharedService>();
             services.AddScoped<IRestaurantService, RestaurantService>();
             services.AddScoped<IUserService, UserService>();
+            services.AddScoped<IGenderService, GenderService>();
+            services.AddScoped<IRoleService, RoleService>();
+            services.AddScoped<IStudentDormService,StudentDormService>();
         }
 
         public static void AddRepositories(this IServiceCollection services)
         {
             services.AddScoped<IRestaurantRepository, RestaurantRepository>();
             services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<IGenderRepository, GenderRepository>();
+            services.AddScoped<IRoleRepository, RoleRepository>();
+            services.AddScoped<IStudentDormRepository, StudentDormRepository>();
            
             services.AddScoped(typeof(IProcedureRepository<>), typeof(ProcedureRepository<>));
         }
