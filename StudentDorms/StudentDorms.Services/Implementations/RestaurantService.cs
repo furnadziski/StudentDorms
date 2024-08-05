@@ -101,7 +101,7 @@ namespace StudentDorms.Services.Implementations
             {
                 throw new StudentDormsException("Ресторан со даденотo id не постои");
             }
-
+           
             _restaurantRepository.DeleteById(id);
         }
 

@@ -182,6 +182,15 @@ namespace StudentDorms.NUnitTesting.Extensions
             Assert.NotNull(result.Value);
         }
 
+        [Test]
+        public void DeleteStudentDormTest() {
+
+            IntSearchModel intSearchModel = new IntSearchModel();
+            intSearchModel.Id = 6;
+            var result = _configController.DeleteStudentDormById(intSearchModel);
+
+        }
+
 
     }
 }

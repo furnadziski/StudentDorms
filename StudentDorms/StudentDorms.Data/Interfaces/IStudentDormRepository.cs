@@ -12,5 +12,12 @@ namespace StudentDorms.Data.Interfaces
   /// </summary>
    public interface IStudentDormRepository : IGenericRepository<StudentDorm>
     {
+
+        /// <summary>
+        /// Метод кој враќа дали студентскиот дом е поврзан со некој блок(returns true if there is block associated)
+        /// </summary>
+        /// <param name="studentDormId"></param>
+        /// <returns></returns>
+        public bool HasAssociatedBlocks(int studentDormId);
     }
 }

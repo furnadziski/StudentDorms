@@ -85,6 +85,22 @@ namespace StudentDorms.Services.Implementations
             _studentDormRepository.Update(studentDorm);
 
         }
+        public void DeleteStudentDormById(int id)
+        {
+            var deletedStudentDorm = _studentDormRepository.GetById(id);
+
+            if (deletedStudentDorm == null)
+            {
+                throw new StudentDormsException("Студентски дом  со даденотo id не постои");
+            }
+
+            if (_studentDormRepository.HasAssociatedBlocks(id))
+            {
+                throw new StudentDormsException("За студенскиот дом постои блок");
+            }
+            else _studentDormRepository.DeleteById(id);
+        }
+
 
     }
 }

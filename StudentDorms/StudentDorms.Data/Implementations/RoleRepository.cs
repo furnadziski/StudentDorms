@@ -15,6 +15,7 @@ namespace StudentDorms.Data.Implementations
         public RoleRepository(DatabaseContext context) : base(context)
         {
 
+
         }
 
      

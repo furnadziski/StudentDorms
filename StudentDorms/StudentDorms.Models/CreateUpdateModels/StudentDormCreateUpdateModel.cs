@@ -10,9 +10,19 @@ namespace StudentDorms.Models.CreateUpdateModels
     /// </summary>
     public class StudentDormCreateUpdateModel
     {
-
+        /// <summary>
+        /// Ид на студентски кој се едитира
+        /// </summary>
         public int Id { get; set; }
+
+        /// <summary>
+        /// Реден број на студентски кој се едитира/креира
+        /// </summary>
         public int Order { get; set; }
+
+        /// <summary>
+        /// Име на студентски кој се едитира/креира
+        /// </summary>
         public string Name { get; set; }
     }
 }

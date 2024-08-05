@@ -36,5 +36,12 @@ namespace StudentDorms.Services.Interfaces
         /// <returns>едитирање на модел за студентски дом</returns>
         public void UpdateStudentDorm(StudentDormCreateUpdateModel studentDormCreateUpdateModel);
 
+        /// <summary>
+        /// Метода за бришење на студентски дом
+        /// </summary>
+        /// <param name="DeleteStudentDormById"></param>
+        /// <returns>бришење на модел за студентски дом</returns>
+        public void DeleteStudentDormById(int id);
+
     }
 }

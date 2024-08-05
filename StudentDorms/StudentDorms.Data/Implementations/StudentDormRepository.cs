@@ -14,7 +14,12 @@ namespace StudentDorms.Data.Implementations
     {
         public StudentDormRepository(DatabaseContext context) : base(context)
         {
-
+        
         }
+       public bool HasAssociatedBlocks(int studentDormId)
+          {
+             return Context.Blocks
+                    .Any(b => b.StudentDormId == studentDormId);
+           }
     }
 }

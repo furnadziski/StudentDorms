@@ -25,7 +25,7 @@ namespace StudentDorms.API.Controllers
             return View();
         }
 
-        public ConfigController(IUserService userService,IStudentDormService studentDormService,ISharedService sharedService)
+        public ConfigController(IUserService userService, IStudentDormService studentDormService, ISharedService sharedService)
         {
             _studentDormService = studentDormService;
             _userService = userService;
@@ -68,7 +68,7 @@ namespace StudentDorms.API.Controllers
 
         [HttpPost("UpdateStudentDorm")]
         public JsonResult UpdateStudentDorm([FromBody] StudentDormCreateUpdateModel studentDormCreateUpdateModel)
-         {
+        {
             _studentDormService.UpdateStudentDorm(studentDormCreateUpdateModel);
             return Json(true);
         }
@@ -91,6 +91,14 @@ namespace StudentDorms.API.Controllers
         {
             var result = _sharedService.GetBooleanOptionsForDropdown();
             return Json(result);
+        }
+
+        [HttpPost("DeleteStudentDormById")]
+        public JsonResult DeleteStudentDormById([FromBody] IntSearchModel intSearchModel)
+        {
+            _studentDormService.DeleteStudentDormById(intSearchModel.Id);
+            return Json(true);
+
         }
     }
 }
