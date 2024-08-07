@@ -35,7 +35,6 @@ namespace StudentDorms.NUnitTesting.Extensions
         private IRoomRepository _roomRepository;
         private IRoomService _roomService;
         private IMealCategoryRepository _mealCategoryRepository;
-        private IMealService _mealCategoryService;
         private IMealRepository _mealRepository;
         private IMealService _mealService;
         private ConfigController _configController;
@@ -73,11 +72,10 @@ namespace StudentDorms.NUnitTesting.Extensions
             _roomService = new RoomService(_roomRepository,_procedureRepositoryRoom);
             _mealCategoryRepository = new MealCategoryRepository(_dbContext);
             _procedureRepositoryMealCategory = new ProcedureRepository<MealCategoryGridModel>(_dbContext);
-            _mealCategoryService = new MealService(_procedureRepositoryMealCategory, _mealCategoryRepository);
             _mealRepository = new MealRepository(_dbContext);
             _procedureRepositoryMeal = new ProcedureRepository<MealGridModel>(_dbContext);
-            _mealService = new MealService(_procedureRepositoryMeal, _mealRepository);
-            _configController = new ConfigController(_userService, _studentDormService, _sharedService, _blockService,_roomService,_mealCategoryService,_mealService);
+            _mealService = new MealService(_procedureRepositoryMealCategory, _mealCategoryRepository,_procedureRepositoryMeal, _mealRepository);
+            _configController = new ConfigController(_userService, _studentDormService, _sharedService, _blockService,_roomService,_mealService);
 
         }
 
@@ -331,7 +329,7 @@ namespace StudentDorms.NUnitTesting.Extensions
         {
             MealSearchModel model = new MealSearchModel();
             model.SearchText = "";
-            model.MealCategoryId = null;
+            model.MealCategoryId = 1;
             model.OrderColumn = "";
             model.OrderDirection = "ASC";
             model.PageNumber = 1;

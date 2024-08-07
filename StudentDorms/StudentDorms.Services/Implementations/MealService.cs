@@ -23,16 +23,14 @@ namespace StudentDorms.Services.Implementations
         private readonly IMealCategoryRepository _mealCategoryRepository;
         private readonly IMealRepository _mealRepository;
 
-        public MealService(IProcedureRepository<MealCategoryGridModel> procedureRepositoryMealCategory, IMealCategoryRepository mealCategoryRepository)
+        public MealService(IProcedureRepository<MealCategoryGridModel> procedureRepositoryMealCategory, IMealCategoryRepository mealCategoryRepository, IProcedureRepository<MealGridModel> procedureRepositoryMeal, IMealRepository mealRepository)
         {
             _procedureRepositoryMealCategory = procedureRepositoryMealCategory;
             _mealCategoryRepository = mealCategoryRepository;
-        }
-        public MealService(IProcedureRepository<MealGridModel> procedureRepositoryMeal, IMealRepository mealRepository)
-        {
             _procedureRepositoryMeal = procedureRepositoryMeal;
             _mealRepository = mealRepository;
         }
+      
 
 
         public SearchResult<MealCategoryGridModel> GeMealCategoriesForGrid(MealCategorySearchModel mealCategorySearchModel)

@@ -22,24 +22,22 @@ namespace StudentDorms.API.Controllers
         IBlockService _blockService;
         IStudentDormService _studentDormService;
         IRoomService _roomService;
-        IMealService _mealCategoryService;
         IMealService _mealService;
+      
         public IActionResult Index()
         {
             return View();
         }
 
         public ConfigController(IUserService userService, IStudentDormService studentDormService, ISharedService sharedService, 
-            IBlockService blockService, IRoomService roomService, IMealService mealCategoryService, IMealService mealService)
+            IBlockService blockService, IRoomService roomService, IMealService mealService)
         {
             _studentDormService = studentDormService;
             _userService = userService;
             _sharedService = sharedService;
             _blockService = blockService;
             _roomService = roomService;
-            _mealCategoryService = mealCategoryService;
             _mealService = mealService;
-
         }
 
         [HttpPost("GetUsersForGrid")]
@@ -75,7 +73,7 @@ namespace StudentDorms.API.Controllers
         [AllowAnonymous]
         public JsonResult GetMealCategoriesForGrid([FromBody] MealCategorySearchModel mealCategorySearchModel)
         {
-            var result = _mealCategoryService.GeMealCategoriesForGrid(mealCategorySearchModel);
+            var result = _mealService.GeMealCategoriesForGrid(mealCategorySearchModel);
             return Json(result);
         }
 
