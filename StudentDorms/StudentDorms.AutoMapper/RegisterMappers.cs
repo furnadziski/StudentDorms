@@ -35,13 +35,25 @@ namespace StudentDorms.AutoMapper
                .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.Title))
                .ReverseMap();
 
+            CreateMap<StudentDorm, Block>()
+                  .ForMember(dest => dest.StudentDormId, opt => opt.MapFrom(src => src.Id))
+                  .ReverseMap();
+
+            CreateMap<RoomCreateUpdateModel, Room>()
+                   .ReverseMap();
+
+
             CreateMap<StudentDormCreateUpdateModel, StudentDorm>()
                 .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Id))
                 .ForMember(dest => dest.Order, opt => opt.MapFrom(src => src.Order))
                 .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.Name))
                 .ReverseMap();
 
-
+            CreateMap<BlockCreateUpdateModel, Block>()
+                .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Id))
+                .ForMember(dest => dest.Order, opt => opt.MapFrom(src => src.Order))
+                .ForMember(dest => dest.StudentDormId, opt => opt.MapFrom(src => src.StudentDormId))
+                .ReverseMap();
 
             CreateMap<DropdownViewModel<int>, Restaurant>()
                 .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.Title))

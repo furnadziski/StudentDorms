@@ -19,17 +19,27 @@ namespace StudentDorms.API.Controllers
         IGenderService _genderService;
         ISharedService _sharedService;
         IUserService _userService;
+        IBlockService _blockService;
         IStudentDormService _studentDormService;
+        IRoomService _roomService;
+        IMealService _mealCategoryService;
+        IMealService _mealService;
         public IActionResult Index()
         {
             return View();
         }
 
-        public ConfigController(IUserService userService, IStudentDormService studentDormService, ISharedService sharedService)
+        public ConfigController(IUserService userService, IStudentDormService studentDormService, ISharedService sharedService, 
+            IBlockService blockService, IRoomService roomService, IMealService mealCategoryService, IMealService mealService)
         {
             _studentDormService = studentDormService;
             _userService = userService;
             _sharedService = sharedService;
+            _blockService = blockService;
+            _roomService = roomService;
+            _mealCategoryService = mealCategoryService;
+            _mealService = mealService;
+
         }
 
         [HttpPost("GetUsersForGrid")]
@@ -42,6 +52,38 @@ namespace StudentDorms.API.Controllers
         public JsonResult GetStudentDormsForGrid([FromBody] StudentDormSearchModel studentDormSearchModel)
         {
             var result = _studentDormService.GetStudentDormsForGrid(studentDormSearchModel);
+            return Json(result);
+        }
+
+        [HttpPost("GetBlocksForGrid")]
+        [AllowAnonymous]
+        public JsonResult GetBlocksForGrid([FromBody] BlockSearchModel blockSearchModel)
+        {
+            var result = _blockService.GetBlocksForGrid(blockSearchModel);
+            return Json(result);
+        }
+
+        [HttpPost("GetRoomsForGrid")]
+        [AllowAnonymous]
+        public JsonResult GetRoomsForGrid([FromBody] RoomSearchModel roomSearchModel)
+        {
+            var result = _roomService.GetRoomsForGrid(roomSearchModel);
+            return Json(result);
+        }
+
+        [HttpPost("GeMealCategoriesForGrid")]
+        [AllowAnonymous]
+        public JsonResult GetMealCategoriesForGrid([FromBody] MealCategorySearchModel mealCategorySearchModel)
+        {
+            var result = _mealCategoryService.GeMealCategoriesForGrid(mealCategorySearchModel);
+            return Json(result);
+        }
+
+        [HttpPost("GetMealsForGrid")]
+        [AllowAnonymous]
+        public JsonResult GetMealsForGrid([FromBody] MealSearchModel mealSearchModel)
+        {
+            var result = _mealService.GetMealsForGrid(mealSearchModel);
             return Json(result);
         }
 
@@ -59,6 +101,19 @@ namespace StudentDorms.API.Controllers
             return Json(true);
         }
 
+        [HttpPost("CreateBlock")]
+        public JsonResult CreateBlock([FromBody] BlockCreateUpdateModel blockCreateUpdateModel)
+        {
+            _blockService.CreateBlock(blockCreateUpdateModel);
+            return Json(true);
+        }
+        [HttpPost("CreateRoom")]
+        public JsonResult CreateRoom([FromBody] RoomCreateUpdateModel roomCreateUpdateModel)
+        {
+            _roomService.CreateRoom(roomCreateUpdateModel);
+            return Json(true);
+        }
+
         [HttpPost("UpdateUser")]
         public JsonResult UpdateUser([FromBody] UserCreateUpdateModel userCreateUpdateModel)
         {
@@ -70,6 +125,19 @@ namespace StudentDorms.API.Controllers
         public JsonResult UpdateStudentDorm([FromBody] StudentDormCreateUpdateModel studentDormCreateUpdateModel)
         {
             _studentDormService.UpdateStudentDorm(studentDormCreateUpdateModel);
+            return Json(true);
+        }
+
+        [HttpPost("UpdateBlock")]
+        public JsonResult UpdateBlock([FromBody] BlockCreateUpdateModel blockCreateUpdateModel)
+        {
+            _blockService.UpdateBlock(blockCreateUpdateModel);
+            return Json(true);
+        }
+        [HttpPost("UpdateRoom")]
+        public JsonResult UpdateRoom([FromBody] RoomCreateUpdateModel roomCreateUpdateModel)
+        {
+            _roomService.UpdateRoom(roomCreateUpdateModel);
             return Json(true);
         }
 
@@ -99,6 +167,20 @@ namespace StudentDorms.API.Controllers
             _studentDormService.DeleteStudentDormById(intSearchModel.Id);
             return Json(true);
 
+        }
+
+        [HttpPost("DeleteBlockById")]
+        public JsonResult DeleteBlockById([FromBody] IntSearchModel intSearchModel)
+        {
+            _blockService.DeleteBlockById(intSearchModel.Id);
+            return Json(true);
+        }
+
+        [HttpPost("DeletRoomById")]
+        public JsonResult DeleteRoomById([FromBody] IntSearchModel intSearchModel)
+        {
+            _roomService.DeleteRoomById(intSearchModel.Id);
+            return Json(true);
         }
     }
 }

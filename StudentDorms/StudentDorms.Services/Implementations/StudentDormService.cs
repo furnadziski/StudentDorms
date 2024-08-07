@@ -40,7 +40,6 @@ namespace StudentDorms.Services.Implementations
             var parameters = new List<SqlParameter>();
             parameters.Add(new SqlParameter("@TotalItems", SqlDbType.Int) { Direction = ParameterDirection.Output });
             parameters.Add(new SqlParameter("@SearchText", !string.IsNullOrEmpty(studentDormSearchModel.SearchText) ? studentDormSearchModel.SearchText : (object)DBNull.Value));
-      
             parameters.Add(new SqlParameter("@OrderColumn", !string.IsNullOrEmpty(studentDormSearchModel.OrderColumn) ? studentDormSearchModel.OrderColumn : (object)DBNull.Value));
             parameters.Add(new SqlParameter("@OrderDirection", studentDormSearchModel.OrderDirection));
             parameters.Add(new SqlParameter("@PageNumber", studentDormSearchModel.PageNumber));

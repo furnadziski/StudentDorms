@@ -68,7 +68,7 @@ namespace StudentDorms.Services.Implementations
             user.DateCreated = DateTime.Now;
             user.ModifiedBy = "admin";
             user.DateModified = DateTime.Now;
-
+ 
             _userRepository.Create(user);
         }
         public void UpdateUser(UserCreateUpdateModel userCreateUpdateModel)

@@ -16,7 +16,8 @@ namespace StudentDorms.Data.Implementations
         {
         
         }
-       public bool HasAssociatedBlocks(int studentDormId)
+       
+        public bool HasAssociatedBlocks(int studentDormId)
           {
              return Context.Blocks
                     .Any(b => b.StudentDormId == studentDormId);
