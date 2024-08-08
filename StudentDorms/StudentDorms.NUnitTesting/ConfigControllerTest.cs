@@ -8,6 +8,7 @@ using StudentDorms.Models.CreateUpdateModels;
 using StudentDorms.Models.GridModels;
 using StudentDorms.Models.SearchModels;
 using StudentDorms.Models.ViewModels;
+using StudentDorms.Models.XmlModels;
 using StudentDorms.Services.Implementations;
 using StudentDorms.Services.Interfaces;
 using System;
@@ -44,6 +45,7 @@ namespace StudentDorms.NUnitTesting.Extensions
         private ProcedureRepository<RoomGridModel> _procedureRepositoryRoom;
         private ProcedureRepository<MealCategoryGridModel> _procedureRepositoryMealCategory;
         private ProcedureRepository<MealGridModel> _procedureRepositoryMeal;
+        private ProcedureRepository<ScalarString> _storedProcedureScalar;
 
 
 
@@ -74,7 +76,8 @@ namespace StudentDorms.NUnitTesting.Extensions
             _procedureRepositoryMealCategory = new ProcedureRepository<MealCategoryGridModel>(_dbContext);
             _mealRepository = new MealRepository(_dbContext);
             _procedureRepositoryMeal = new ProcedureRepository<MealGridModel>(_dbContext);
-            _mealService = new MealService(_procedureRepositoryMealCategory, _mealCategoryRepository,_procedureRepositoryMeal, _mealRepository);
+            _storedProcedureScalar = new ProcedureRepository<ScalarString>(_dbContext);
+            _mealService = new MealService(_procedureRepositoryMealCategory, _mealCategoryRepository,_procedureRepositoryMeal, _mealRepository, _storedProcedureScalar);
             _configController = new ConfigController(_userService, _studentDormService, _sharedService, _blockService,_roomService,_mealService);
 
         }
@@ -285,11 +288,12 @@ namespace StudentDorms.NUnitTesting.Extensions
             model.Capacity = 4;
             model.IsActive = true;
             model.Order = 5;
-            model.RoomNo = "TestCreate";
+            model.RoomNo = "TestCreatdaaae";
 
             var result = _configController.CreateRoom(model);
             Assert.NotNull(result.Value);
         }
+
         [Test]
         public void UpdateRoomTest()
         {
@@ -337,5 +341,39 @@ namespace StudentDorms.NUnitTesting.Extensions
             var result = _configController.GetMealsForGrid(model);
             Assert.NotNull(result.Value);
         }
+
+        [Test]
+        public void CreateMealTest()
+        {
+            MealCreateUpdateModel model = new MealCreateUpdateModel();
+            model.Id = 7;
+            model.MealCategoryId = 1;
+            model.Name = "Test dorusdcek";
+            model.Order = 2;
+            var result = _configController.CreateMeal(model);
+            Assert.NotNull(result.Value);
+        }
+
+        [Test]
+        public void UpdateMealTest()
+        {
+            MealCreateUpdateModel model = new MealCreateUpdateModel();
+            model.Id = 6;
+            model.MealCategoryId = 2;
+            model.Name = "Testdsf update";
+            model.Order = 3;
+            var result = _configController.UpdateMeal(model);
+            Assert.NotNull(result.Value);
+        }
+
+        [Test]
+        public void DeleteMealTest()
+        {
+            IntSearchModel intSearchModel = new IntSearchModel();
+            intSearchModel.Id = 17;
+            var result = _configController.DeleteMealById(intSearchModel);
+
+        }
+
     }
 }

@@ -1,6 +1,7 @@
 ﻿using StudentDorms.Domain.Config;
 using StudentDorms.Models.GridModels;
 using Microsoft.EntityFrameworkCore;
+using StudentDorms.Models.XmlModels;
 
 namespace StudentDorms.Data.Context
 {
@@ -25,6 +26,8 @@ namespace StudentDorms.Data.Context
         public DbSet<RoomGridModel> RoomGridModel {get; set;}
         public DbSet<MealCategoryGridModel> MealCategoryGridModel { get; set;}
         public DbSet<MealGridModel> MealGridModel { get; set;}
+        public DbSet<AccommodationGridModel> AccommodationGridModel { get; set;}
+        public DbSet<ScalarString> ScalarString { get; set;}
 
 
 
@@ -59,6 +62,8 @@ namespace StudentDorms.Data.Context
             modelBuilder.Entity<RoomGridModel>().HasNoKey();
             modelBuilder.Entity<MealCategoryGridModel>().HasNoKey();
             modelBuilder.Entity<MealGridModel>().HasNoKey();
+            modelBuilder.Entity<AccommodationGridModel>().HasNoKey();
+            modelBuilder.Entity<ScalarString>().HasNoKey();
 
 
             modelBuilder.Entity<Block>().ToTable("Blocks","config");

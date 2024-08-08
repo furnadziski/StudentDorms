@@ -29,5 +29,10 @@ namespace StudentDorms.Domain.Config
         /// </summary>
         [ForeignKey("MealCategoryId")]
         public MealCategory MealCategory { get; set; }
+
+        /// <summary>
+        /// Реден број на оброк
+        /// </summary>
+        public int Order { get; set; }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using StudentDorms.Data.Context;
+using StudentDorms.Data.Extensions;
 using StudentDorms.Data.Interfaces;
 using StudentDorms.Domain.Config;
 using System;
@@ -9,11 +10,10 @@ using System.Threading.Tasks;
 
 namespace StudentDorms.Data.Implementations
 {
-    public class MealCategoryRepository : GenericRepository<MealCategory>, IMealCategoryRepository
+    public class AccommodationRepository : GenericRepository<AnnualAccommodation>, IAccommodationRepository
     {
-        public MealCategoryRepository(DatabaseContext context) : base(context)
+        public AccommodationRepository(DatabaseContext context) : base(context)
         {
-
         }
     }
 }

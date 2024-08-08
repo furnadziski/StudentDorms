@@ -1,5 +1,4 @@
 ﻿using StudentDorms.Data.Extensions;
-using StudentDorms.Data.Implementations;
 using StudentDorms.Domain.Config;
 using System;
 using System.Collections.Generic;
@@ -8,8 +7,8 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace StudentDorms.Data.Interfaces
-{
-    public interface IMealCategoryRepository : IGenericRepository<MealCategory>
+{ 
+    public interface IAccommodationRepository : IGenericRepository<AnnualAccommodation>
     {
     }
 }

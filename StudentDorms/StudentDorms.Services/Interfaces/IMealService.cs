@@ -1,4 +1,5 @@
 ﻿using StudentDorms.Models.Base;
+using StudentDorms.Models.CreateUpdateModels;
 using StudentDorms.Models.GridModels;
 using StudentDorms.Models.SearchModels;
 using System;
@@ -6,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Xml2CSharp;
 
 namespace StudentDorms.Services.Interfaces
 {
@@ -27,5 +29,40 @@ namespace StudentDorms.Services.Interfaces
         /// <param name="mealSearchModel"></param>
         /// <returns>Листа од Грид модел за оброци</returns>
         public SearchResult<MealGridModel> GetMealsForGrid(MealSearchModel mealSearchModel);
+
+        /// <summary>
+        /// Метод за креирање на оброк
+        /// </summary>
+        /// <param name="mealCreateUpdateModel"></param>
+        /// <returns>креирање на модел за оброк</returns>
+        public void CreateMeal(MealCreateUpdateModel mealCreateUpdateModel);
+
+        /// <summary>
+        /// Метод за едитирање на оброк
+        /// </summary>
+        /// <param name="mealCreateUpdateModel"></param>
+        /// <returns>едитирање на модел за оброк</returns>
+        public void UpdateMeal(MealCreateUpdateModel mealCreateUpdateModel);
+
+        /// <summary>
+        /// Метод за бришење на оброк
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>едитирање на модел за оброк</returns>
+        public void DeleteMealById(int id);
+
+        /// <summary>
+        /// Метод зa прикажување на оброци
+        /// </summary>
+        /// <param name="filterMealSearchModel"></param>
+        /// <returns>прикажувањена модел за оброк</returns>
+        public WeeklyMealsXmlModel FilterMealSchedule(FilterMealSearchModel filterMealSearchModel);
+
+        /// <summary>
+        /// Метод зa прикажување на гласање за оборци
+        /// </summary>
+        /// <param name="filterMealVotingSearchModel"></param>
+        /// <returns>прикажувањена модел за гласање за оборци<</returns>
+        public WeeklyMealsVoting FilterMealVoting(FilterMealVotingSearchModel filterMealVotingSearchModel);
     }
 }

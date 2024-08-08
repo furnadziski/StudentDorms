@@ -112,6 +112,13 @@ namespace StudentDorms.API.Controllers
             return Json(true);
         }
 
+        [HttpPost("CreateMeal")]
+        public JsonResult CreateMeal([FromBody] MealCreateUpdateModel mealCreateUpdateModel)
+        {
+            _mealService.CreateMeal(mealCreateUpdateModel);
+            return Json(true);
+        }
+
         [HttpPost("UpdateUser")]
         public JsonResult UpdateUser([FromBody] UserCreateUpdateModel userCreateUpdateModel)
         {
@@ -136,6 +143,13 @@ namespace StudentDorms.API.Controllers
         public JsonResult UpdateRoom([FromBody] RoomCreateUpdateModel roomCreateUpdateModel)
         {
             _roomService.UpdateRoom(roomCreateUpdateModel);
+            return Json(true);
+        }
+
+        [HttpPost("UpdateMeal")]
+        public JsonResult UpdateMeal([FromBody] MealCreateUpdateModel mealCreateUpdateModel)
+        {
+            _mealService.UpdateMeal(mealCreateUpdateModel);
             return Json(true);
         }
 
@@ -180,6 +194,14 @@ namespace StudentDorms.API.Controllers
             _roomService.DeleteRoomById(intSearchModel.Id);
             return Json(true);
         }
+
+        [HttpPost("DeletMealById")]
+        public JsonResult DeleteMealById([FromBody] IntSearchModel intSearchModel)
+        {
+            _mealService.DeleteMealById(intSearchModel.Id);
+            return Json(true);
+        }
+
     }
 }
 

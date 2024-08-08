@@ -42,6 +42,8 @@ namespace StudentDorms.AutoMapper
             CreateMap<RoomCreateUpdateModel, Room>()
                    .ReverseMap();
 
+            CreateMap<MealCreateUpdateModel, Meal>()
+                   .ReverseMap();
 
             CreateMap<StudentDormCreateUpdateModel, StudentDorm>()
                 .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Id))
