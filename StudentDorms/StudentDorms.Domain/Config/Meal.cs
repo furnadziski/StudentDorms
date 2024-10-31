@@ -28,7 +28,7 @@ namespace StudentDorms.Domain.Config
         /// Категорија на оброк
         /// </summary>
         [ForeignKey("MealCategoryId")]
-        public MealCategory MealCategory { get; set; }
+        public virtual  MealCategory MealCategory { get; set; }
 
         /// <summary>
         /// Реден број на оброк

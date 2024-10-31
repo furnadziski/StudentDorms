@@ -9,7 +9,13 @@ namespace StudentDorms.Models.GridModels
    /// Модел во кој се чуваат инфромации за студентскиот дом
    /// </summary>
     public class StudentDormGridModel
-    {
+        {
+
+        /// <summary>
+        /// Ид на студентскиот дом
+        /// </summary>
+        public int Id { get; set; }
+
         /// <summary>
         /// Име на студентскиот дом
         /// </summary>

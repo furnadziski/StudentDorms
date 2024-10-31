@@ -1,9 +1,5 @@
 ﻿using StudentDorms.AutoMapper;
 using StudentDorms.Common.Exceptions;
-using StudentDorms.Data.Implementations;
-using StudentDorms.Data.Interfaces;
-using StudentDorms.Domain;
-using StudentDorms.Domain.Config;
 using StudentDorms.Models.Enums;
 using StudentDorms.Models.Shared;
 using StudentDorms.Models.ViewModels;
@@ -13,8 +9,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace StudentDorms.Services.Implementations
 {

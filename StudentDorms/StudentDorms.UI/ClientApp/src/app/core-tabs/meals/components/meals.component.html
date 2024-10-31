@@ -1,0 +1,34 @@
+<div class="container">
+    <h2>Оброци</h2>
+    <div class="form-group" >
+        <label for="week-range">Недела</label>
+        <input type="text" id="week-range" class="form-control" [value]="weekRange.start + ' - ' + weekRange.end" disabled>
+        <button (click)="previousWeek()" class="btn btn-outline-secondary">&lt;</button>
+        <button (click)="nextWeek()" class="btn btn-outline-secondary">&gt;</button>
+    
+</div>
+<!-- <div  class="col-5">                  
+ <div  *ngFor="let day of weekDays" >
+                    <h2 class="text-center">{{ day.name }} ({{ day.date | date: 'dd.MM.yyyy' }})</h2>
+                    <p>Доручек: {{ day.breakfast || 'Нема податоци' }} 
+                        ({{ day.breakfastPercent || 0 }}%)</p>
+                    <p>Ручек: {{ day.lunch || 'Нема податоци' }} 
+                        ({{ day.lunchPercent || 0 }}%)</p>
+                    <p>Вечера: {{ day.dinner || 'Нема податоци' }} 
+                        ({{ day.dinnerPercent || 0 }}%)</p>
+                </div>
+            
+</div> -->
+</div>
+
+<div class="row">
+    <div class="col-md-1" *ngFor="let day of weekDays">
+        <h2 class="text-center">{{ day.name }} ({{ day.date | date: 'dd.MM.yyyy' }})</h2>
+                    <p>Доручек: {{ day.breakfast || 'Нема податоци' }} 
+                        ({{ day.breakfastPercent || 0 }}%)</p>
+                    <p>Ручек: {{ day.lunch || 'Нема податоци' }} 
+                        ({{ day.lunchPercent || 0 }}%)</p>
+                    <p>Вечера: {{ day.dinner || 'Нема податоци' }} 
+                        ({{ day.dinnerPercent || 0 }}%)</p>
+    </div>
+</div>

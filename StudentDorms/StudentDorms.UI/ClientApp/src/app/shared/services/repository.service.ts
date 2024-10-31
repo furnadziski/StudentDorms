@@ -97,4 +97,5 @@ ajaxCall(url: string, dataForSend: any, method: string, local: boolean = false):
     }
     return null;
   }
+ 
 }

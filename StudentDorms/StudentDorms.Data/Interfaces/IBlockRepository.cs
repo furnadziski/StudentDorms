@@ -19,7 +19,13 @@ namespace StudentDorms.Data.Interfaces
         /// <returns></returns>
         public bool HasAssociatedRooms(int blockId);
 
-
+        /// <summary>
+        /// Метод кој враќа блок за ажурирање
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public Block GetBlockForUpdateById(int id);
+        public IEnumerable<Block> GetBlockByStudentDormId(int id);
     }
 
 }

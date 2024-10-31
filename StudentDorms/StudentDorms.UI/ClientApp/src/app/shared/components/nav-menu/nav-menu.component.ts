@@ -12,9 +12,15 @@ export class NavMenuComponent implements OnInit {
 
   ngOnInit(): void {
   }
-
+  accommodation
   public routeLinks = [
-    { link: "dashboard", name: "menu_Dashboard", icon: "home", title: "Почетна страна" },
+    { link: "dashboard", name: "menu_Dashboard", icon: "home", title: "Home" },
+    { link: "accommodation", name: "menu_Accommodations",icon:"hotel icon", title: "Accommodations" },
+    { link: "meals", name: "menu_Meals",icon:"fastfood icon", title: "Meals" },
+    { link: "myprofile", name: "menu_Profile",icon:"home", title: "MyProfile" },
+    { link: "payments", name: "menu_Payments",icon:"payment icon", title: "Payments" },
+    { link: "tickets", name: "menu_Tickets",icon:"report problem icon", title: "Tickets" },
+    { link: "configuration", name: "menu_Configuration",icon:"build icon", title: "Configuration" },
      { link: "food", name: "menu_Food", icon: "restaurant", title: "Food" }
   ];
 }

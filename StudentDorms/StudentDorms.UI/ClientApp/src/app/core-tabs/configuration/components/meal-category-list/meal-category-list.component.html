@@ -1,0 +1,46 @@
+<div class="card">
+    <div class="card-header">
+    </div>
+    <div class="card-body">
+        <form [formGroup]="searchForm" (ngSubmit)="filterMealCategories()">
+            <div class="form-group row mb-2">
+                <div class="col-md-4">
+                    <mat-form-field style="margin-top: 11px;margin-left: 20px;">
+                        <input matInput class="form-control" type="text" placeholder="Пребарај" formControlName="searchText"/>
+                    </mat-form-field>
+                    <div style="position: absolute; top: 95px; left: 350px;">
+                        <button class="mat-icon-button mat-primary">
+                            <mat-icon>search</mat-icon>       
+                        </button>
+                        <button class="mat-icon-button mat-primary" color="primary" (click)="clear()">
+                            <mat-icon>clear</mat-icon>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <br>
+      <div class="mat-elevation-z8" *ngIf="mealCategoryDataSource && mealCategoryDataSource.data!=undefined">
+        <table mat-table [dataSource]="mealCategoryDataSource.data" class="mat-elevation-z8"  matSort (matSortChange)="sortEvent($event)" style="width: 100%;">
+
+            <ng-container matColumnDef="Name">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header colspan="2"> Име </th>
+                <td mat-cell *matCellDef="let element" colspan="2"> {{element.name}} </td>
+            </ng-container>
+            <ng-container matColumnDef="Order">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header colspan="2"> Реден Број </th>
+                <td mat-cell *matCellDef="let element" colspan="2"> {{element.order}} </td>
+               </ng-container>
+        
+
+
+            <tr mat-header-row *matHeaderRowDef="displayMealCategoriesColumnItems"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayMealCategoriesColumnItems"></tr>
+        </table>
+        <mat-paginator [length]="mealCategoryDataSource.count" [pageSize]="10" [pageSizeOptions]="[1,5,10,20]" (page)="pageEvent($event)" 
+            showFirstLastButtons aria-label="Select meal category page">
+        </mat-paginator>
+    </div>
+</div>
+

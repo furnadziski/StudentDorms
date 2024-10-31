@@ -1,0 +1,55 @@
+<div class="card">
+</div>
+<div class="card-body">
+    <div>
+        <mat-toolbar color="primary">
+            <p>{{label}}</p>
+        </mat-toolbar>
+    </div>
+    <br>
+    <br>
+    <form [formGroup]="mealUpdateForm">
+        <div class="form-group row mb-2">
+            <div>
+                <div>
+                   
+                </div>
+                <div >
+                    <mat-form-field >
+                        <mat-label>Категорија на оброк</mat-label>
+                        <mat-select formControlName="selectedCategory" [compareWith]="compareFn">
+                            <mat-option *ngFor="let cat of mealCategories" [value]="cat">
+                                {{ cat.title }}
+                            </mat-option>
+                          </mat-select>
+                        <mat-error *ngIf="mealUpdateForm.get('selectedCategory').invalid && mealUpdateForm.get('selectedCategory').touched">
+                            {{getErrorMessage(mealUpdateForm.get('selectedCategory'))}}
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+                <div>
+                    <mat-form-field>
+                        <input matInput class="form-control" type="text" placeholder="Име" formControlName="name"/>
+                        <mat-error *ngIf="mealUpdateForm.get('name').invalid && mealUpdateForm.get('name').touched">
+                            {{getErrorMessage(mealUpdateForm.get('name'))}}</mat-error>       
+                    </mat-form-field>
+                </div>
+                
+                <div> 
+                    <mat-form-field>
+                        <input matInput class="form-control" type="number" placeholder="Редослед" formControlName="order" value="dataSource?.order"/>
+                        <mat-error *ngIf="mealUpdateForm.get('order').invalid && mealUpdateForm.get('order').touched">
+                            {{getErrorMessage(mealUpdateForm.get('order'))}}</mat-error>                       
+                        <mat-error *ngIf="mealUpdateForm.get('order').hasError('negativeDuration') && (mealUpdateForm.get('order').dirty || mealUpdateForm.get('order').touched)">            
+                            Бројот мора да e позитивен</mat-error>
+                    </mat-form-field>
+                </div>
+
+            </div>
+        </div>
+    </form>
+    <mat-dialog-actions class="materialModalActions">
+        <button class="mat-raised-button mat-primary okModal" [disabled]="mealUpdateForm.invalid" (click)="save()">Зачувај</button>
+        <button class="mat-raised-button closeModal" (click)="close()">Затвори</button>
+    </mat-dialog-actions>
+</div>

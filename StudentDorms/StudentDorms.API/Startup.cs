@@ -50,21 +50,21 @@ namespace StudentDorms.API
             //    ).AddFluentValidation
             //    (fv => fv.RegisterValidatorsFromAssemblyContaining<UserCreateValidator>());
 
-            //services.AddControllers().AddJsonOptions(options =>
-            //{
-            //    options.JsonSerializerOptions.Converters.Add(new DateTimeConverters());
-            //});
+            services.AddControllers().AddJsonOptions(options =>
+            {
+                options.JsonSerializerOptions.Converters.Add(new DateTimeConverter());
+            });
 
             services.AddSingleton(AutoMapperConfiguration.Initialize());
 
-            services.AddControllersWithViews(config =>
-            {
+            //services.AddControllersWithViews(config =>
+            //{
 
-            }).AddJsonOptions(opts =>
-            {
-                //opts.JsonSerializerOptions.PropertyNamingPolicy = null;
-                opts.JsonSerializerOptions.Converters.Add(new DateTimeConverter());
-            });//.AddFluentValidation();
+            //}).AddJsonOptions(opts =>
+            //{
+            //    //opts.JsonSerializerOptions.PropertyNamingPolicy = null;
+            //    opts.JsonSerializerOptions.Converters.Add(new DateTimeConverter());
+            //});//.AddFluentValidation();
 
 
            

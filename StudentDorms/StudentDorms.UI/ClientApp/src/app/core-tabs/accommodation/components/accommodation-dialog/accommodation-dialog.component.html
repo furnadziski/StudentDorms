@@ -1,0 +1,55 @@
+<div class="card">
+</div>
+<div class="card-body">
+    <div>
+        <mat-toolbar color="primary">
+            <p>{{label}}</p>
+        </mat-toolbar>
+    </div>
+    <br>
+    <br>
+    <form [formGroup]="accommodationUpdateForm">
+        <div class="form-group row mb-2">
+            <div>
+                <div >
+                    <mat-form-field >
+                        <mat-label>Студенти</mat-label>
+                        <mat-select formControlName="selectedStudents" multiple [compareWith]="compareFn">
+                            <mat-option *ngFor="let s of students; let i =index" [value]="s">
+                                {{s.title}}
+                            </mat-option>
+                        </mat-select>
+                        <mat-error *ngIf="accommodationUpdateForm.get('selectedStudents').invalid && accommodationUpdateForm.get('selectedStudents').touched">
+                            {{getErrorMessage(accommodationUpdateForm.get('selectedStudents'))}}
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+                
+                <div> 
+                    <mat-form-field>
+                        <input matInput class="form-control" type="string" placeholder="Капацитет" formControlName="capacity" value="dataSource?.capacity" />
+                        <mat-error *ngIf="accommodationUpdateForm.get('capacity').invalid && accommodationUpdateForm.get('capacity').touched">
+                            {{getErrorMessage(accommodationUpdateForm.get('capacity'))}}</mat-error>                       
+                        <mat-error *ngIf="accommodationUpdateForm.get('capacity').hasError('negativeDuration') && (accommodationUpdateForm.get('capacity').dirty || accommodationUpdateForm.get('capacity').touched)">            
+                            Бројот мора да e позитивен</mat-error>
+                    </mat-form-field>
+                </div>
+
+                <div> 
+                    <mat-form-field>
+                        <input matInput class="form-control" type="string" placeholder="Соба" formControlName="room" value="dataSource?.room"/>
+                        <mat-error *ngIf="accommodationUpdateForm.get('room').invalid && accommodationUpdateForm.get('room').touched">
+                            {{getErrorMessage(accommodationUpdateForm.get('room'))}}</mat-error>                       
+                        <mat-error *ngIf="accommodationUpdateForm.get('room').hasError('negativeDuration') && (accommodationUpdateForm.get('room').dirty || accommodationUpdateForm.get('room').touched)">            
+                            Бројот мора да e позитивен</mat-error>
+                    </mat-form-field>
+                </div>
+
+            </div>
+        </div>
+    </form>
+    <mat-dialog-actions class="materialModalActions">
+        <button class="mat-raised-button mat-primary okModal" [disabled]="accommodationUpdateForm.invalid" (click)="save()">Зачувај</button>
+        <button class="mat-raised-button closeModal" (click)="close()">Затвори</button>
+    </mat-dialog-actions>
+</div>

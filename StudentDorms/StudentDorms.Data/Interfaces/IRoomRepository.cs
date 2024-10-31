@@ -13,11 +13,16 @@ namespace StudentDorms.Data.Interfaces
     public interface IRoomRepository : IGenericRepository<Room>
     {
         /// <summary>
-        /// Метод кој враќа дали собата е поврзан со некое годишно сместување (returns true if there is room associated)
+        /// Метод кој враќа дали собата е поврзанa со некое годишно сместување (returns true if there is room associated)
         /// </summary>
         /// <param name="roomid"></param>
         /// <returns></returns>
         public bool HasAssociatedAnnualAccommodations(int roomid);
+
+        public Room GetRoomForUpdateById(int id);
+        public IEnumerable<Room> GetRoomsForDropdownByBlockId(int id);
+
+
     }
 
 }

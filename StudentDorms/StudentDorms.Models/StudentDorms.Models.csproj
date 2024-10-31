@@ -5,18 +5,21 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="CommonModels\**" />
+    <EmbeddedResource Remove="CommonModels\**" />
+    <None Remove="CommonModels\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Aspose.Cells" Version="23.12.0" />
     <PackageReference Include="FluentValidation.AspNetCore" Version="10.3.3" />
     <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="10.3.4" />
+    <PackageReference Include="log4net" Version="2.0.17" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\StudentDorms.Domain\StudentDorms.Domain.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="CommonModels\" />
   </ItemGroup>
 
 </Project>

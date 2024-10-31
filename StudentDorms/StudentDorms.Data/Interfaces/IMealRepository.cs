@@ -20,6 +20,9 @@ namespace StudentDorms.Data.Interfaces
         /// <returns></returns>
         public bool HasAssociatedWeeklyMeals(int mealid);
 
+        public Meal GetMealForUpdateById(int id);
+        public IEnumerable<Meal> GetMealsByCategoryId(int id);
+
     }
 }
 

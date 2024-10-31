@@ -22,6 +22,11 @@ namespace StudentDorms.Configuration
             services.AddScoped<IGenderService, GenderService>();
             services.AddScoped<IRoleService, RoleService>();
             services.AddScoped<IStudentDormService,StudentDormService>();
+            services.AddScoped<IBlockService, BlockService>();
+            services.AddScoped<IAnnualAccommodationService, AnnualAccommodationService>();
+            services.AddScoped<IMealService, MealService>();
+            services.AddScoped<IRoomService, RoomService>();
+
         }
 
         public static void AddRepositories(this IServiceCollection services)
@@ -31,6 +36,14 @@ namespace StudentDorms.Configuration
             services.AddScoped<IGenderRepository, GenderRepository>();
             services.AddScoped<IRoleRepository, RoleRepository>();
             services.AddScoped<IStudentDormRepository, StudentDormRepository>();
+            services.AddScoped<IBlockRepository, BlockRepository>();
+            services.AddScoped<IAnnualAccommodationRepository, AnnualAccommodationRepository>();
+            services.AddScoped<IMealCategoryRepository, MealCategoryRepository>();
+            services.AddScoped<IMealRepository, MealRepository>();
+            services.AddScoped<IRoomRepository, RoomRepository>();
+            services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<IWeeklyMealRepository, WeeklyMealRepository>();
+            services.AddScoped<IAnnualAccommodationUserRepository, AnnualAccommodationUserRepository>();
            
             services.AddScoped(typeof(IProcedureRepository<>), typeof(ProcedureRepository<>));
         }

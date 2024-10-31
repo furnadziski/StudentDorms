@@ -1,0 +1,39 @@
+<mat-accordion>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+       <mat-panel-title> Категории на оброци </mat-panel-title>
+ </mat-expansion-panel-header>
+ <ng-template matExpansionPanelContent>
+ <app-meal-category-list></app-meal-category-list>
+</ng-template>
+</mat-expansion-panel>
+
+  <mat-expansion-panel>
+  <mat-expansion-panel-header>
+  <mat-panel-title> Оброци </mat-panel-title>
+  </mat-expansion-panel-header>
+  <ng-template matExpansionPanelContent>
+  <app-meals-list></app-meals-list>
+  </ng-template>
+  </mat-expansion-panel>
+
+  <mat-expansion-panel>
+  <mat-expansion-panel-header>
+   <mat-panel-title> Категории на тикети </mat-panel-title>
+  </mat-expansion-panel-header>
+  <ng-template matExpansionPanelContent>
+  <app-ticket-category-list></app-ticket-category-list>
+  </ng-template>
+  </mat-expansion-panel>
+
+
+    <mat-expansion-panel>
+    <mat-expansion-panel-header>
+     <mat-panel-title> Приоритет на тикети </mat-panel-title>
+    </mat-expansion-panel-header>
+    <ng-template matExpansionPanelContent>
+    <app-ticket-priority-list></app-ticket-priority-list>
+    </ng-template>
+    </mat-expansion-panel>
+</mat-accordion>
+

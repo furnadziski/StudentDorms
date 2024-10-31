@@ -2,6 +2,7 @@
 using StudentDorms.Models.CreateUpdateModels;
 using StudentDorms.Models.GridModels;
 using StudentDorms.Models.SearchModels;
+using StudentDorms.Models.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -41,5 +42,15 @@ namespace StudentDorms.Services.Interfaces
         /// <param name="id"></param>
         /// <returns>Бришање на модел за блок</returns>
         public void DeleteBlockById(int id);
+
+        /// <summary>
+        /// Метод за наоѓање на блок
+        /// </summary>
+        /// <param name="blockId"></param>
+        /// <returns>наоѓање на модел за блок</returns>
+        public BlockViewModel GetBlockById(int blockId);
+
+        public List<DropdownViewModel<int>> GetBlocksForDropdown();
+        public List<DropdownViewModel<int>> GetBlocksForDropdownByStudentDormId(int StudentDormid);
     }
 }

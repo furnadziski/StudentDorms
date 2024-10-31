@@ -1,0 +1,76 @@
+<div class="card">
+</div>
+<div class="card-body">
+    <div>
+        <mat-toolbar color="primary">
+            <p>{{label}}</p>
+        </mat-toolbar>
+    </div>
+    <br>
+    <br>
+    <form [formGroup]="roomUpdateForm">
+        <div class="form-group row mb-2">
+            <div>
+                <div>
+                    <mat-form-field>
+                        <input matInput class="form-control" type="text" placeholder="Име" formControlName="name"/>
+                        <mat-error *ngIf="roomUpdateForm.get('name').invalid && roomUpdateForm.get('name').touched">
+                            {{getErrorMessage(roomUpdateForm.get('name'))}}</mat-error>       
+                    </mat-form-field>
+                </div>
+                <div >
+                    <mat-form-field >
+                        <mat-label>Студентски дом</mat-label>
+                        <mat-select formControlName="selectedDorm" [compareWith]="compareFn">
+                            <mat-option *ngFor="let dorm of studentDorms" [value]="dorm">
+                                {{ dorm.title }}
+                            </mat-option>
+                        </mat-select>
+                        <mat-error *ngIf="roomUpdateForm.get('selectedDorm').invalid && roomUpdateForm.get('selectedDorm').touched">
+                            {{getErrorMessage(roomUpdateForm.get('selectedDorm'))}}
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+
+                <div >
+                    <mat-form-field >
+                        <mat-label>Блок</mat-label>
+                        <mat-select formControlName="block" [compareWith]="compareFn">
+                            <mat-option *ngFor="let block of blocks" [value]="block">
+                                {{ block.title }}
+                            </mat-option>
+                        </mat-select>
+                        <mat-error *ngIf="roomUpdateForm.get('block').invalid && roomUpdateForm.get('block').touched">
+                            {{getErrorMessage(roomUpdateForm.get('block'))}}
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+            
+                <div> 
+                    <mat-form-field>
+                        <input matInput class="form-control" type="number" placeholder="Капацитет" formControlName="capacity" value="dataSource?.capacity"/>
+                        <mat-error *ngIf="roomUpdateForm.get('capacity').invalid && roomUpdateForm.get('capacity').touched">
+                            {{getErrorMessage(roomUpdateForm.get('capacity'))}}</mat-error>                       
+                        <mat-error *ngIf="roomUpdateForm.get('capacity').hasError('negativeDuration') && (roomUpdateForm.get('capacity').dirty || roomUpdateForm.get('capacity').touched)">            
+                            Бројот мора да e позитивен</mat-error>
+                    </mat-form-field>
+                </div>
+                
+                <div> 
+                    <mat-form-field>
+                        <input matInput class="form-control" type="number" placeholder="Редослед" formControlName="order" value="dataSource?.order"/>
+                        <mat-error *ngIf="roomUpdateForm.get('order').invalid && roomUpdateForm.get('order').touched">
+                            {{getErrorMessage(roomUpdateForm.get('order'))}}</mat-error>                       
+                        <mat-error *ngIf="roomUpdateForm.get('order').hasError('negativeDuration') && (roomUpdateForm.get('order').dirty || roomUpdateForm.get('order').touched)">            
+                            Бројот мора да e позитивен</mat-error>
+                    </mat-form-field>
+                </div>
+
+            </div>
+        </div>
+    </form>
+    <mat-dialog-actions class="materialModalActions">
+        <button class="mat-raised-button mat-primary okModal" [disabled]="roomUpdateForm.invalid" (click)="save()">Зачувај</button>
+        <button class="mat-raised-button closeModal" (click)="close()">Затвори</button>
+    </mat-dialog-actions>
+</div>

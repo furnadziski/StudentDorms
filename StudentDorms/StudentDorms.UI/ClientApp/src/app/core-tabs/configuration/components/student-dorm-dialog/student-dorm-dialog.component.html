@@ -1,0 +1,38 @@
+<div class="card">
+</div>
+<div class="card-body">
+    <div>
+        <mat-toolbar color="primary">
+            <p>{{label}}</p>
+        </mat-toolbar>
+    </div>
+    <br>
+    <br>
+    <form [formGroup]="studentDormUpdateForm">
+        <div class="form-group row mb-2">
+            <div>
+                <div>
+                    <mat-form-field>
+                        <input matInput class="form-control" type="text" placeholder="Име на студентски дом" formControlName="name"/>
+                        <mat-error *ngIf="studentDormUpdateForm.get('name').invalid && studentDormUpdateForm.get('name').touched">
+                            {{getErrorMessage(studentDormUpdateForm.get('name'))}}</mat-error>       
+                    </mat-form-field>
+                </div>
+                <div> 
+                    <mat-form-field>
+                        <input matInput class="form-control" type="number" placeholder="Редослед" formControlName="order" value="dataSource?.order"/>
+                        <mat-error *ngIf="studentDormUpdateForm.get('order').invalid && studentDormUpdateForm.get('order').touched">
+                            {{getErrorMessage(studentDormUpdateForm.get('order'))}}</mat-error>                       
+                        <mat-error *ngIf="studentDormUpdateForm.get('order').hasError('negativeDuration') && (studentDormUpdateForm.get('order').dirty || studentDormUpdateForm.get('order').touched)">            
+                            Бројот мора да e позитивен</mat-error>
+                    </mat-form-field>
+                </div>
+
+            </div>
+        </div>
+    </form>
+    <mat-dialog-actions class="materialModalActions">
+        <button class="mat-raised-button mat-primary okModal" [disabled]="studentDormUpdateForm.invalid" (click)="save()">Зачувај</button>
+        <button class="mat-raised-button closeModal" (click)="close()">Затвори</button>
+    </mat-dialog-actions>
+</div>

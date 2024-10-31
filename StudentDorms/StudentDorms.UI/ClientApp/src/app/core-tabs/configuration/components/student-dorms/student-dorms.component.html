@@ -1,0 +1,29 @@
+<mat-accordion>
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+           <mat-panel-title> Студентски Домови </mat-panel-title>
+     </mat-expansion-panel-header>
+
+     <ng-template matExpansionPanelContent>
+     <app-student-dorms-list></app-student-dorms-list>
+    </ng-template>
+  </mat-expansion-panel>
+
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+     <mat-panel-title> Блокови </mat-panel-title>
+    </mat-expansion-panel-header>
+    <ng-template matExpansionPanelContent>
+       <app-blocks-list></app-blocks-list>
+       </ng-template>
+  </mat-expansion-panel>
+
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+       <mat-panel-title> Соби </mat-panel-title>
+      </mat-expansion-panel-header>
+      <ng-template matExpansionPanelContent>
+    <app-rooms-list></app-rooms-list>
+    </ng-template>
+  </mat-expansion-panel>
+</mat-accordion>

@@ -29,7 +29,7 @@ namespace StudentDorms.Models.GridModels
         /// <summary>
         /// Име на студентски дом
         /// </summary>
-        public string StudentDormName { get; set; }
+        public string StudentDorm { get; set; }
 
         /// <summary>
         /// Име на соба

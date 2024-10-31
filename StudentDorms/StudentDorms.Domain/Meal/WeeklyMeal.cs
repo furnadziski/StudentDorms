@@ -28,7 +28,7 @@ namespace StudentDorms.Domain.Config
         /// <summary>
         /// Надворешен клуч до оброк
         /// </summary>
-        public int MealId { get; set; }
+        public int? MealId { get; set; }
 
         /// <summary>
         /// Оброк

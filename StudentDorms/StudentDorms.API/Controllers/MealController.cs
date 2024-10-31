@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using StudentDorms.Models.GridModels;
 using StudentDorms.Models.SearchModels;
 using StudentDorms.Services.Interfaces;
 using System;
@@ -26,7 +27,6 @@ namespace StudentDorms.API.Controllers
         }
 
         [HttpPost("FilterMealSchedule")]
-        [AllowAnonymous]
         public JsonResult FilterMealSchedule([FromBody] FilterMealSearchModel filterMealSearchModel)
         {
             var result = _mealService.FilterMealSchedule(filterMealSearchModel);
@@ -34,11 +34,17 @@ namespace StudentDorms.API.Controllers
         }
 
         [HttpPost("FilterMealVoting")]
-        [AllowAnonymous]
         public JsonResult FilterMealVoting([FromBody] FilterMealVotingSearchModel filterMealVotingSearchModel)
         {
             var result = _mealService.FilterMealVoting(filterMealVotingSearchModel);
             return Json(result);
+        }
+
+        [HttpPost("SaveMealVoting")]
+        public JsonResult SaveMealVoting([FromBody] List<MealVoteGridModel> mealVoteGridModels)
+        {
+          _mealService.SaveMealVote(mealVoteGridModels);
+            return Json(true);
         }
 
     }

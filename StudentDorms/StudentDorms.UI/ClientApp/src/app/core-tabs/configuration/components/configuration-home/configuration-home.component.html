@@ -1,0 +1,10 @@
+<nav mat-tab-nav-bar>
+   
+    <span *ngFor="let link of routeLinks; let i = index">
+        <a mat-tab-link routerLink='{{link.routerLink}}' (click)="setActiveTab(i)"
+        routerLinkActive="{{link.routerLinkActive}}" [active]="link.isActive">{{link.title}}</a>
+        
+    </span>
+  </nav> 
+
+  <router-outlet></router-outlet>

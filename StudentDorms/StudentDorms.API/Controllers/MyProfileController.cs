@@ -13,16 +13,20 @@ namespace StudentDorms.API.Controllers
     [AllowAnonymous]
     public class MyProfileController : Controller
     {
+
+         
         public IActionResult Index()
         {
             return View();
         }
 
         IMealService _mealService;
+        IUserService _userService;
 
-        public MyProfileController(IMealService mealService)
+        public MyProfileController(IMealService mealService, IUserService userService)
         {
             _mealService = mealService;
+            _userService = userService;
         }
 
         [HttpPost("FilterMealSchedule")]
@@ -30,6 +34,14 @@ namespace StudentDorms.API.Controllers
         public JsonResult FilterMealSchedule([FromBody] FilterMealSearchModel filterMealSearchModel)
         {
             var result = _mealService.FilterMealSchedule(filterMealSearchModel);
+            return Json(result);
+        }
+
+        [HttpPost("GetUserForMyProfile")]
+        [AllowAnonymous]
+        public JsonResult GetUserForMyProfile([FromBody] MyProfileSearchModel myProfileSearchModel)
+        {
+            var result = _userService.GetUserForMyProfile(myProfileSearchModel);
             return Json(result);
         }
 

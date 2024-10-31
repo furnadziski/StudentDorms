@@ -5,6 +5,7 @@ using StudentDorms.Data.Interfaces;
 using StudentDorms.Domain.Config;
 using StudentDorms.Models.Base;
 using StudentDorms.Models.CreateUpdateModels;
+using StudentDorms.Models.Enums;
 using StudentDorms.Models.GridModels;
 using StudentDorms.Models.SearchModels;
 using StudentDorms.Models.ViewModels;
@@ -22,16 +23,18 @@ namespace StudentDorms.Services.Implementations
    public class UserService : IUserService
     {
         private readonly IProcedureRepository<UserGridModel> _procedureRepositoryUser;
+        private readonly IProcedureRepository<MyProfileGridModel> _procedureRepositoryMyprofile;
         private readonly IUserRepository _userRepository;
 
-        public UserService(IProcedureRepository<UserGridModel> procedureRepositoryUser, IUserRepository userRepository)
+        public UserService(IProcedureRepository<UserGridModel> procedureRepositoryUser, IUserRepository userRepository,
+            IProcedureRepository<MyProfileGridModel> procedureRepositoryMyprofile)
         {
             _procedureRepositoryUser = procedureRepositoryUser;
             _userRepository = userRepository;
+            _procedureRepositoryMyprofile = procedureRepositoryMyprofile;
         }
         public SearchResult<UserGridModel> GetUsersForGrid(UserSearchModel userSearchModel)
         {
-           
             if (userSearchModel == null)
             {
                 throw new StudentDormsException("Моделот не постои!");
@@ -61,14 +64,12 @@ namespace StudentDorms.Services.Implementations
             {
                 throw new StudentDormsException("Моделот не смее да содржи null вредност");
             }
-
-            var user = userCreateUpdateModel.ToDomain<User, UserCreateUpdateModel>();
+           var user = userCreateUpdateModel.ToDomain<User, UserCreateUpdateModel>();
            
             user.CreatedBy = "admin";
             user.DateCreated = DateTime.Now;
             user.ModifiedBy = "admin";
             user.DateModified = DateTime.Now;
- 
             _userRepository.Create(user);
         }
         public void UpdateUser(UserCreateUpdateModel userCreateUpdateModel)
@@ -78,14 +79,11 @@ namespace StudentDorms.Services.Implementations
                 throw new StudentDormsException("Моделот не смее да биде null ");
             }
 
-
             var user = _userRepository.GetUserWithRolesById(userCreateUpdateModel.Id);
             if (user == null)
             {
                 throw new StudentDormsException("Не постои запис за корисник во база");
-            }
-
-            
+            }           
             var usr = userCreateUpdateModel.ToDomain<User, UserCreateUpdateModel>();
 
             user.FirstName = userCreateUpdateModel.FirstName;
@@ -94,12 +92,89 @@ namespace StudentDorms.Services.Implementations
             user.GenderId = userCreateUpdateModel.GenderId;
             user.UserRoles = usr.UserRoles;
             user.IsActive = userCreateUpdateModel.IsActive;
-           
             user.ModifiedBy = "admin";
             user.DateModified = DateTime.Now;
                         
             _userRepository.Update(user);
         }
+
+        public SearchResult<MyProfileGridModel> GetUserForMyProfile(MyProfileSearchModel myProfileSearchModel)
+        {
+
+            if (myProfileSearchModel == null)
+            {
+                throw new StudentDormsException("Моделот не постои!");
+            }
+
+            var parameters = new List<SqlParameter>();
+       
+            parameters.Add(new SqlParameter("@UserId", myProfileSearchModel.UserId));
+       
+
+            var dbResult = _procedureRepositoryMyprofile.ExecListResultQuery("[config].[GetProfileByUserId]", parameters.ToArray());
+            var result = new SearchResult<MyProfileGridModel>();
+
+            result.Data = dbResult.ToList();
+            result.Count = parameters[0].Value != null ? (int)parameters[0].Value : 0;
+            return result;
+        }
+
+        public List<DropdownViewModel<int>> GetUserWithRoleAndBlock(int BlockId,int year)
+        {
+            var students = _userRepository.GetUsersByRoleAndBlock(RolesEnum.Student, BlockId, year);
+            if (students == null)
+            {
+                return new List<DropdownViewModel<int>>();
+            }
+
+            var result = students.Select(x => x.ToModel<DropdownViewModel<int>, User>()).ToList();
+            return result;
+        }
+
+        public List<DropdownViewModel<int>> GetStudentsForDropDown()
+        {
+            var students = _userRepository.GetUsersByRole(RolesEnum.Student);
+            if (students == null)
+            {
+                return new List<DropdownViewModel<int>>();
+            }
+
+            var result = students.Select(x => x.ToModel<DropdownViewModel<int>, User>()).ToList();
+            return result;
+        }
+
+        public UserViewModel GetUserById(int userid)
+        {
+            var user = _userRepository.GetUserWithRolesById(userid);
+            if (user == null)
+            {
+                throw new StudentDormsException("За корисникот со даденотo id нема запис");
+            }
+            // var result = user.ToDomain<UserViewModel, User>();
+           
+            var result = new UserViewModel
+            {
+                Id = user.Id,
+                Email=user.Email,
+                IsActive=user.IsActive,
+                FirstName=user.FirstName,
+                LastName=user.LastName,
+                Username=user.Username,
+                Roles= user.UserRoles.Select(x=>x.ToModel<DropdownViewModel<int>,UserRole>()).ToList(),
+             Gender =new DropdownViewModel<int>
+                {
+                    Id=user.GenderId,
+                    Title=user.Gender.Name
+                },
+                               
+                
+            };
+            return result;
+        }
+          
+
+
+       
 
     }
 }

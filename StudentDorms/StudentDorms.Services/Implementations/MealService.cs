@@ -9,6 +9,7 @@ using StudentDorms.Models.Base;
 using StudentDorms.Models.CreateUpdateModels;
 using StudentDorms.Models.GridModels;
 using StudentDorms.Models.SearchModels;
+using StudentDorms.Models.ViewModels;
 using StudentDorms.Models.XmlModels;
 using StudentDorms.Services.Interfaces;
 using System;
@@ -30,17 +31,20 @@ namespace StudentDorms.Services.Implementations
         private readonly IProcedureRepository<ScalarString> _storedProcedureScalar;
         private readonly IMealCategoryRepository _mealCategoryRepository;
         private readonly IMealRepository _mealRepository;
+        private readonly IWeeklyMealRepository _weeklyMealRepository;
 
         public MealService(IProcedureRepository<MealCategoryGridModel> procedureRepositoryMealCategory, IMealCategoryRepository mealCategoryRepository, 
-            IProcedureRepository<MealGridModel> procedureRepositoryMeal, IMealRepository mealRepository, IProcedureRepository<ScalarString> storedProcedureScalar)
+            IProcedureRepository<MealGridModel> procedureRepositoryMeal, IMealRepository mealRepository, IProcedureRepository<ScalarString> storedProcedureScalar,
+            IWeeklyMealRepository weeklyMealRepository)
         {
             _procedureRepositoryMealCategory = procedureRepositoryMealCategory;
             _mealCategoryRepository = mealCategoryRepository;
             _procedureRepositoryMeal = procedureRepositoryMeal;
             _mealRepository = mealRepository;
             _storedProcedureScalar = storedProcedureScalar;
-        }
-      
+            _weeklyMealRepository = weeklyMealRepository; 
+        }  
+
 
 
         public SearchResult<MealCategoryGridModel> GeMealCategoriesForGrid(MealCategorySearchModel mealCategorySearchModel)
@@ -105,9 +109,10 @@ namespace StudentDorms.Services.Implementations
                 return weeklyMealsVoting;
 
             }
-            weeklyMealsVoting = XMLSerializer.Deserialize<WeeklyMealsVoting>(storedProcedureResult.FirstOrDefault().Value);
+              weeklyMealsVoting = XMLSerializer.Deserialize<WeeklyMealsVoting>(storedProcedureResult.FirstOrDefault().Value);
+           
             return weeklyMealsVoting;
-
+            
         }
 
 
@@ -178,6 +183,75 @@ namespace StudentDorms.Services.Implementations
                 throw new StudentDormsException("За оброкот постои неделен оброк");
             }
             else _mealRepository.DeleteById(id);
+        }
+
+        public void SaveMealVote(List<MealVoteGridModel> mealVoteGridModels)
+        {
+           foreach (var item in mealVoteGridModels)
+            {
+                if (item.MealId.HasValue)
+                {
+                    var weeklyMeals = _weeklyMealRepository.GetVotedWeeklyMeals(item.UserId,item.MealCategoryId,item.Date);
+                    if (weeklyMeals !=null)
+                    {       
+                        weeklyMeals.MealId = item.MealId;
+                        weeklyMeals.DateModified = DateTime.Now;
+                        weeklyMeals.ModifiedBy = item.UserId.ToString();
+         
+                        _weeklyMealRepository.Update(weeklyMeals);
+                    }
+                    else
+                    {
+                        WeeklyMeal weeklyMealCreate = new WeeklyMeal();
+                        weeklyMealCreate.MealId = item.MealId;
+                        weeklyMealCreate.UserId = item.UserId;
+                        weeklyMealCreate.Date = item.Date;
+                        weeklyMealCreate.CreatedBy = item.UserId.ToString();
+                        weeklyMealCreate.DateCreated = DateTime.Now;
+                        weeklyMealCreate.DateModified = DateTime.Now;
+                        weeklyMealCreate.ModifiedBy = item.UserId.ToString();
+                        _weeklyMealRepository.Create(weeklyMealCreate);
+                    }
+                }
+                else
+                {           
+                    var weeklyMeals = _weeklyMealRepository.GetVotedWeeklyMeals(item.UserId, item.MealCategoryId, item.Date);
+                    _weeklyMealRepository.Delete(weeklyMeals);
+                }
+            }
+        }
+
+        public List<DropdownViewModel<int>> GetMealCategoriesForDropdown()
+        {
+            var categories = _mealCategoryRepository.GetAll();
+            if (categories == null)
+            {
+                throw new StudentDormsException("Не постои запис за категориите");
+            }
+            var result = categories.Select(x => x.ToModel<DropdownViewModel<int>, MealCategory>()).ToList();
+            return result;
+        }
+
+        public List<DropdownViewModel<int>> GetMealsForDropdown(int id)
+        {
+            var meals = _mealRepository.GetMealsByCategoryId(id);
+            if (meals == null)
+            {
+                throw new StudentDormsException("Не постои запис за категориите");
+            }
+              var result = meals.Select(x => x.ToModel<DropdownViewModel<int>, Meal>()).ToList();
+            return result;
+        }
+
+        public MealViewModel GetMealById(int mealid)
+        {
+            var meal = _mealRepository.GetMealForUpdateById(mealid);
+            if (meal == null)
+            {
+                throw new StudentDormsException("За оброкот со даденотo id нема запис");
+            }
+            var result = meal.ToDomain<MealViewModel, Meal>();
+            return result;
         }
     }
 }

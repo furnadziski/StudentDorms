@@ -28,6 +28,11 @@ namespace StudentDorms.Models.CreateUpdateModels
         /// </summary>
         public int Order { get; set; }
 
+         /// <summary>
+         ///  Блок во кој е собата
+         /// </summary>
+        public int StudentDormId { get; set; }
+
         /// <summary>
         ///  Блок во кој е собата
         /// </summary>

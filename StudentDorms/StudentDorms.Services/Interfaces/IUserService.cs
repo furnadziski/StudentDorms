@@ -2,6 +2,7 @@
 using StudentDorms.Models.CreateUpdateModels;
 using StudentDorms.Models.GridModels;
 using StudentDorms.Models.SearchModels;
+using StudentDorms.Models.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -34,6 +35,17 @@ namespace StudentDorms.Services.Interfaces
         /// <param name="userCreateUpdateModel"></param>
         /// <returns>едитирање на модел за корисник</returns>
         public void UpdateUser(UserCreateUpdateModel userCreateUpdateModel);
+
+        /// <summary>
+        /// Метода за прикажување и филтрирање на податоци на Грид
+        /// </summary>
+        /// <param name="myProfileSearchModel"></param>
+        /// <returns>Листа од Грид модел за корисничкиот профил </returns>
+        public SearchResult<MyProfileGridModel> GetUserForMyProfile(MyProfileSearchModel myProfileSearchModel);
+
+        public UserViewModel GetUserById(int userid);
+        public List<DropdownViewModel<int>> GetUserWithRoleAndBlock(int BlockId,int year);
+        public List<DropdownViewModel<int>> GetStudentsForDropDown();
 
     }
 }

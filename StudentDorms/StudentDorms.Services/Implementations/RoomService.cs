@@ -7,6 +7,7 @@ using StudentDorms.Models.Base;
 using StudentDorms.Models.CreateUpdateModels;
 using StudentDorms.Models.GridModels;
 using StudentDorms.Models.SearchModels;
+using StudentDorms.Models.ViewModels;
 using StudentDorms.Services.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -89,14 +90,66 @@ namespace StudentDorms.Services.Implementations
 
             if (deletedRoom == null)
             {
-                throw new StudentDormsException("Блокот со даденотo id не постои");
+                throw new StudentDormsException("Собата  со даденотo id не постои");
             }
 
             if (_roomRepository.HasAssociatedAnnualAccommodations(id))
             {
-                throw new StudentDormsException("За блокот постои соба");
+                throw new StudentDormsException("Собата е поврзанa со годишно сместување");
             }
             else _roomRepository.DeleteById(id);
+        }
+
+        public RoomViewModel GetRoomById(int roomid)
+        {
+            var room = _roomRepository.GetRoomForUpdateById(roomid);
+            if (room == null)
+            {
+                throw new StudentDormsException("За собата со даденотo id нема запис");
+            }
+
+           
+            var result = new RoomViewModel
+            {
+                Id = room.Id,
+                Order = room.Order,
+                Block = new DropdownViewModel<int> {
+                    Id = room.BlockId,
+                    Title = room.Block.Name
+                },
+                Capacity=room.Capacity,
+                RoomNo=room.RoomNo,
+                StudentDorm =new DropdownViewModel<int> {
+                    Id=room.Block.StudentDormId,
+                Title=room.Block.StudentDorm.Name}
+                
+            };
+
+            return result;
+        }
+        public List<DropdownViewModel<int>> GetRoomsForDropdown()
+        {
+            var rooms = _roomRepository.GetAll();
+            if (rooms == null)
+            {
+                throw new StudentDormsException("Не постои запис за собите");
+
+            }
+            var result = rooms.Select(x => x.ToModel<DropdownViewModel<int>, Room>()).ToList();
+            return result;
+
+        }
+
+        public List<DropdownViewModel<int>> GetRoomsForDropdownByBlockId(int BlockId)
+        {
+            var dorms = _roomRepository.GetRoomsForDropdownByBlockId(BlockId);
+            if (dorms == null)
+            {
+                return new List<DropdownViewModel<int>>();
+            }
+
+            var result = dorms.Select(x => x.ToModel<DropdownViewModel<int>, Room>()).ToList();
+            return result;
         }
 
     }

@@ -19,6 +19,7 @@ namespace StudentDorms.Domain.Config
         /// </summary>
         public int StudentDormId { get; set; }
 
+    
         /// <summary>
         /// Студентскиот дом
         /// </summary>
@@ -26,12 +27,12 @@ namespace StudentDorms.Domain.Config
         public virtual StudentDorm StudentDorm { get; set; }
 
         /// <summary>
-        /// Име на студентскиот дом
+        /// Име на блок
         /// </summary>
         public string Name { get; set; }
 
         /// <summary>
-        /// Реден број на студентскиот дом
+        /// Реден број на блок
         /// </summary>
         public int Order { get; set; }
     }

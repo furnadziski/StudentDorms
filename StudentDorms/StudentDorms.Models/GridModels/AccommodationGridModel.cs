@@ -9,7 +9,13 @@ namespace StudentDorms.Models.GridModels
     /// Модел во кој се чуваат инфромации за годишно сместување
     /// </summary>
     public class AccommodationGridModel
+
+   
     {
+        /// <summary>
+        /// Ид
+        /// </summary>
+        public int Id { get; set; }
         /// <summary>
         /// Име на соба
         /// </summary>

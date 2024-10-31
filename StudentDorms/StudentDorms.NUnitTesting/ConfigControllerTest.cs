@@ -38,11 +38,13 @@ namespace StudentDorms.NUnitTesting.Extensions
         private IMealCategoryRepository _mealCategoryRepository;
         private IMealRepository _mealRepository;
         private IMealService _mealService;
+        private IWeeklyMealRepository _weeklyMealRepository;
         private ConfigController _configController;
         private ProcedureRepository<UserGridModel> _procedureRepositoryUser;
         private ProcedureRepository<StudentDormGridModel> _procedureRepositoryStudentDorm;
         private ProcedureRepository<BlockGridModel> _procedureRepositoryBlock;
         private ProcedureRepository<RoomGridModel> _procedureRepositoryRoom;
+        private ProcedureRepository<MyProfileGridModel> _procedureRepositoryMyProfile;
         private ProcedureRepository<MealCategoryGridModel> _procedureRepositoryMealCategory;
         private ProcedureRepository<MealGridModel> _procedureRepositoryMeal;
         private ProcedureRepository<ScalarString> _storedProcedureScalar;
@@ -65,7 +67,8 @@ namespace StudentDorms.NUnitTesting.Extensions
             _sharedService = new SharedService();
             _studentDormService = new StudentDormService(_procedureRepositoryStudentDorm, _studentDormRepository);
             _userRepository = new UserRepository(_dbContext);
-            _userService = new UserService(_procedureRepositoryUser, _userRepository);
+            _procedureRepositoryMyProfile = new ProcedureRepository<MyProfileGridModel>(_dbContext);
+            _userService = new UserService(_procedureRepositoryUser, _userRepository,_procedureRepositoryMyProfile);
             _blockRepository = new BlockRepository(_dbContext);
             _procedureRepositoryBlock = new ProcedureRepository<BlockGridModel>(_dbContext);
             _blockService = new BlockService(_procedureRepositoryBlock, _blockRepository);
@@ -77,8 +80,11 @@ namespace StudentDorms.NUnitTesting.Extensions
             _mealRepository = new MealRepository(_dbContext);
             _procedureRepositoryMeal = new ProcedureRepository<MealGridModel>(_dbContext);
             _storedProcedureScalar = new ProcedureRepository<ScalarString>(_dbContext);
-            _mealService = new MealService(_procedureRepositoryMealCategory, _mealCategoryRepository,_procedureRepositoryMeal, _mealRepository, _storedProcedureScalar);
-            _configController = new ConfigController(_userService, _studentDormService, _sharedService, _blockService,_roomService,_mealService);
+            _weeklyMealRepository = new WeeklyMealRepository(_dbContext);
+            _mealService = new MealService(_procedureRepositoryMealCategory, _mealCategoryRepository,_procedureRepositoryMeal,
+                _mealRepository, _storedProcedureScalar, _weeklyMealRepository);
+            _configController = new ConfigController(_userService, _studentDormService, _sharedService, 
+                _blockService,_roomService,_mealService);
 
         }
 
@@ -174,7 +180,7 @@ namespace StudentDorms.NUnitTesting.Extensions
             model.OrderDirection = "ASC";
             model.PageNumber = 1;
             model.RowsPerPage = 10;
-            var result = _configController.GetStudentDormsForGrid(model);
+            var result = _configController.GetStudentDormsForGrid();
             Assert.NotNull(result.Value);
         }
 
@@ -374,6 +380,9 @@ namespace StudentDorms.NUnitTesting.Extensions
             var result = _configController.DeleteMealById(intSearchModel);
 
         }
+
+        
+
 
     }
 }

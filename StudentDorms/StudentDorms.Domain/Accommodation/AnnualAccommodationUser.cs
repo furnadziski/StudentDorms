@@ -12,7 +12,7 @@ namespace StudentDorms.Domain.Config
     /// <summary>
     /// Класа во која се чуваат информации за годишно сместување по корисник
     /// </summary>
-    public class AnnualAccommodationUser :BaseEntityWithTimestamp<int>
+    public class AnnualAccommodationUser : BaseEntity<int>
     {
         /// <summary>
         /// Надворешен клуч до годшно сместување

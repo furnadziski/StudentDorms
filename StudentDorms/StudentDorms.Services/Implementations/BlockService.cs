@@ -7,13 +7,13 @@ using StudentDorms.Models.Base;
 using StudentDorms.Models.CreateUpdateModels;
 using StudentDorms.Models.GridModels;
 using StudentDorms.Models.SearchModels;
+using StudentDorms.Models.ViewModels;
 using StudentDorms.Services.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 using static StudentDorms.Data.Interfaces.IProcedureRepository;
 
 namespace StudentDorms.Services.Implementations
@@ -22,16 +22,21 @@ namespace StudentDorms.Services.Implementations
     {
         private readonly IProcedureRepository<BlockGridModel> _procedureRepositoryBlock;
         private readonly IBlockRepository _blockRepository;
+        private readonly IRoomRepository _roomRepository;
 
-        public BlockService(IProcedureRepository<BlockGridModel> procedureRepositoryBlock, IBlockRepository blockRepository)
+        public BlockService(
+            IProcedureRepository<BlockGridModel> procedureRepositoryBlock,
+            IBlockRepository blockRepository,
+            IRoomRepository roomRepository
+            )
         {
             _procedureRepositoryBlock = procedureRepositoryBlock;
             _blockRepository = blockRepository;
+            _roomRepository = roomRepository;
         }
 
         public SearchResult<BlockGridModel> GetBlocksForGrid(BlockSearchModel blockSearchModel)
         {
-
             if (blockSearchModel == null)
             {
                 throw new StudentDormsException("Моделот не постои!");
@@ -62,6 +67,7 @@ namespace StudentDorms.Services.Implementations
 
             var block = blockCreateUpdateModel.ToDomain<Block, BlockCreateUpdateModel>();
 
+
             _blockRepository.Create(block);
         }
 
@@ -81,7 +87,7 @@ namespace StudentDorms.Services.Implementations
             block.Name = blockCreateUpdateModel.Name;
             block.Order = blockCreateUpdateModel.Order;
             block.StudentDormId = blockCreateUpdateModel.StudentDormId;
-            _blockRepository.Update(block);
+              _blockRepository.Update(block);
         }
         public void DeleteBlockById(int id)
         {
@@ -98,5 +104,41 @@ namespace StudentDorms.Services.Implementations
             }
             else _blockRepository.DeleteById(id);
         }
+
+        public BlockViewModel GetBlockById(int blockId)
+        {
+            var block = _blockRepository.GetBlockForUpdateById(blockId);
+            if (block == null)
+            {
+                throw new StudentDormsException("За блокот со даденотo id нема запис");
+            }
+            var result = block.ToDomain<BlockViewModel, Block>();
+            return result;
+        }
+
+        public List<DropdownViewModel<int>> GetBlocksForDropdown()
+        {
+            var blocks = _blockRepository.GetAll();
+            if (blocks == null)
+            {
+                return new List<DropdownViewModel<int>>();
+            }
+
+            var result = blocks.Select(x => x.ToModel<DropdownViewModel<int>, Block>()).ToList();
+            return result;
+        }
+
+        public List<DropdownViewModel<int>> GetBlocksForDropdownByStudentDormId(int StudentDormid)
+        {
+            var blocks = _blockRepository.GetBlockByStudentDormId(StudentDormid);
+            if (blocks == null)
+            {
+                return new List<DropdownViewModel<int>>();
+            }
+
+            var result = blocks.Select(x => x.ToModel<DropdownViewModel<int>, Block>()).ToList();
+            return result;
+        }
+
     }
 }

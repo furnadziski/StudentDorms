@@ -1,0 +1,126 @@
+<div class="card">
+     <div class="card-body">
+        <form [formGroup]="searchForm" (ngSubmit)="filterAccommodation()">
+            <div class="form-group row mb-3">
+                <div class="col-md-3">
+                   <mat-form-field style="margin-top: 11px;margin-left: 20px;">
+                        <mat-label>Студентски дом</mat-label>
+                        <mat-select formControlName="selectedDorm" (ngModelChange)="getBlocksByStudentDorm($event)">
+                            <mat-option *ngFor="let dorm of studentDorms" [value]="dorm">
+                                {{ dorm.title }}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                    <mat-form-field style="margin-top: 11px;margin-left: 20px;">
+                 <mat-label>Блок</mat-label>
+                 <mat-select formControlName="selectedBlock" (ngModelChange)="getRoomsForDropdownByBlockId($event)">
+                     <mat-option *ngFor="let block of blocks" [value]="block">
+                         {{ block.title }}
+                     </mat-option>
+                 </mat-select>
+             </mat-form-field>
+             <div style="position: absolute; top: 55px; left: 680px;">
+                 <button class="mat-icon-button mat-primary">
+                     <mat-icon>search</mat-icon>
+                 </button>
+                 <button class="mat-icon-button mat-primary" color="primary" (click)="clear()">
+                     <mat-icon>clear</mat-icon>
+                 </button>
+             </div>
+            </div>     
+
+            </div>
+        </form>
+    </div>
+    <br>
+    <hr>
+     
+</div>
+<div *ngIf="isDivVisible" class="card">
+    <div class="card-body">
+       <form [formGroup]="secondSearchForm" (ngSubmit)="filterAccommodation()">
+           <div class="form-group row mb-3">
+               <div class="col-md-3">
+                  <mat-form-field style="margin-top: 11px;margin-left: 20px;">
+                       <mat-label>Соба</mat-label>
+                       <mat-select formControlName="selectedRoom">
+                           <mat-option *ngFor="let room of rooms" [value]="room">
+                               {{ room.title }}
+                           </mat-option>
+                       </mat-select>
+                   </mat-form-field>
+
+                   <mat-form-field>
+                    <input matInput class="form-control" type="number" placeholder="Капацитет" formControlName="capacity" value="dataSource?.capacity"/>
+                      </mat-form-field>
+
+                   <mat-form-field style="margin-top: 11px;margin-left: 20px;">
+                <mat-label>Студент</mat-label>
+                <mat-select formControlName="Students">
+                    <mat-option *ngFor="let student of students" [value]="student">
+                        {{ student.title }}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+               
+               <mat-checkbox formControlName="isFree" style="margin-top: 11px; margin-left: 20px;">
+                Само со слободно место
+            </mat-checkbox>
+            <div style="position: absolute; top: 55px; left: 680px;" >
+                <button class="mat-icon-button mat-primary" >
+                    <mat-icon>search</mat-icon>
+                </button>
+                <button class="mat-icon-button mat-primary" color="primary" (click)="clear()">
+                    <mat-icon>clear</mat-icon>
+                </button>
+            </div>
+           </div>     
+
+           </div>
+       </form>
+   </div>
+   <br>
+   <div class="mat-elevation-z8" *ngIf="accommodationDataSource && accommodationDataSource.data!=undefined">
+    <table mat-table [dataSource]="accommodationDataSource.data" class="mat-elevation-z8"  matSort (matSortChange)="sortEvent($event)" style="width: 100%;">
+        <ng-container matColumnDef="Room">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header colspan="2"> Соба  </th>
+            <td mat-cell *matCellDef="let element" colspan="2"> {{element.room}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="Gender">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header colspan="2"> Пол </th>
+            <td mat-cell *matCellDef="let element" colspan="2"> {{element.gender}} </td>
+        </ng-container>
+        <ng-container matColumnDef="Capacity">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header colspan="2"> Капацитет </th>
+            <td mat-cell *matCellDef="let element" colspan="2"> {{element.capacity}} </td>
+           </ng-container>
+           <ng-container matColumnDef="Fullnes">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header colspan="2"> Пополнетост </th>
+            <td mat-cell *matCellDef="let element" colspan="2"> {{element.occupancy}} </td>
+           </ng-container>
+           <ng-container matColumnDef="Students">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header colspan="2"> Студенти </th>
+            <td mat-cell *matCellDef="let element" colspan="2"> {{element.students}} </td>
+           </ng-container>
+           
+    
+           <ng-container matColumnDef="Actions">
+            <th mat-header-cell *matHeaderCellDef  colspan="2"> Акции </th>
+            <td mat-cell *matCellDef="let element" colspan="2" style="width:20%;">
+                <button mat-icon-button color="primary" (click)="openDialog(element.id)">
+                    <mat-icon>edit</mat-icon>
+                </button>
+               
+            </td>
+        </ng-container>
+
+
+        <tr mat-header-row *matHeaderRowDef="displayAccommodationColumnItems"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayAccommodationColumnItems"></tr>
+    </table>
+    <mat-paginator [length]="accommodationDataSource.count" [pageSize]="10" [pageSizeOptions]="[1,5,10,20]" (page)="pageEvent($event)" 
+        showFirstLastButtons aria-label="Select block page">
+    </mat-paginator>
+</div>   
+</div>

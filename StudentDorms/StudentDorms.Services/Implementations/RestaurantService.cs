@@ -121,7 +121,7 @@ namespace StudentDorms.Services.Implementations
             var restaurants = _restaurantRepository.GetAll();
             if(restaurants == null)
             {
-                throw new StudentDormsException("Не постои запис за рестораните");
+                return new List<DropdownViewModel<int>>();
             }
 
             var result = restaurants.Select(x => x.ToModel<DropdownViewModel<int>, Restaurant>()).ToList();

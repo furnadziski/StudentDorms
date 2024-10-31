@@ -1,5 +1,6 @@
 ﻿using StudentDorms.Data.Extensions;
 using StudentDorms.Domain.Config;
+using StudentDorms.Models.Enums;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,5 +20,9 @@ namespace StudentDorms.Data.Interfaces
         /// <param name="id"></param>
         /// <returns></returns>
         User GetUserWithRolesById(int id);
+
+        public IEnumerable<User> GetUsersByRole(RolesEnum role);
+        public IEnumerable<User> GetUsersByRoleAndBlock(RolesEnum role, int blockId, int year);
     }
+
 }

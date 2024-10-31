@@ -1,4 +1,5 @@
-﻿using StudentDorms.Data.Context;
+﻿using Microsoft.EntityFrameworkCore;
+using StudentDorms.Data.Context;
 using StudentDorms.Data.Interfaces;
 using StudentDorms.Domain.Config;
 using System;
@@ -19,6 +20,16 @@ namespace StudentDorms.Data.Implementations
         {
             return Context.WeeklyMeals
                    .Any(b => b.MealId == mealid);
+        }
+
+        public Meal GetMealForUpdateById(int id)
+        {
+            return DbSet.Include(x => x.MealCategory).Where(x => x.Id == id).FirstOrDefault();
+        }
+
+        public IEnumerable<Meal> GetMealsByCategoryId(int id)
+        {
+            return DbSet.Include(x => x.MealCategory).Where(x => x.MealCategoryId == id).ToList();
         }
     }
 }

@@ -1,0 +1,55 @@
+<div class="card">
+</div>
+<div class="card-body">
+    <div>
+        <mat-toolbar color="primary">
+            <p>{{label}}</p>
+        </mat-toolbar>
+    </div>
+    <br>
+    <br>
+    <form [formGroup]="blockUpdateForm">
+        <div class="form-group row mb-2">
+            <div>
+                <div>
+                   
+                </div>
+                <div >
+                    <mat-form-field >
+                        <mat-label>Студентски дом</mat-label>
+                        <mat-select formControlName="selectedDorm" [compareWith]="compareFn">
+                            <mat-option *ngFor="let dorm of studentDorms" [value]="dorm">
+                                {{ dorm.title }}
+                            </mat-option>
+                        </mat-select>
+                        <mat-error *ngIf="blockUpdateForm.get('selectedDorm').invalid && blockUpdateForm.get('selectedDorm').touched">
+                            {{getErrorMessage(blockUpdateForm.get('selectedDorm'))}}
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+                <div>
+                    <mat-form-field>
+                        <input matInput class="form-control" type="text" placeholder="Име" formControlName="name"/>
+                        <mat-error *ngIf="blockUpdateForm.get('name').invalid && blockUpdateForm.get('name').touched">
+                            {{getErrorMessage(blockUpdateForm.get('name'))}}</mat-error>       
+                    </mat-form-field>
+                </div>
+                
+                <div> 
+                    <mat-form-field>
+                        <input matInput class="form-control" type="number" placeholder="Редослед" formControlName="order" value="dataSource?.order"/>
+                        <mat-error *ngIf="blockUpdateForm.get('order').invalid && blockUpdateForm.get('order').touched">
+                            {{getErrorMessage(blockUpdateForm.get('order'))}}</mat-error>                       
+                        <mat-error *ngIf="blockUpdateForm.get('order').hasError('negativeDuration') && (blockUpdateForm.get('order').dirty || blockUpdateForm.get('order').touched)">            
+                            Бројот мора да e позитивен</mat-error>
+                    </mat-form-field>
+                </div>
+
+            </div>
+        </div>
+    </form>
+    <mat-dialog-actions class="materialModalActions">
+        <button class="mat-raised-button mat-primary okModal" [disabled]="blockUpdateForm.invalid" (click)="save()">Зачувај</button>
+        <button class="mat-raised-button closeModal" (click)="close()">Затвори</button>
+    </mat-dialog-actions>
+</div>

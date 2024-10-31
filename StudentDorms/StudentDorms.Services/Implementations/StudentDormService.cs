@@ -8,13 +8,12 @@ using StudentDorms.Models.Base;
 using StudentDorms.Models.CreateUpdateModels;
 using StudentDorms.Models.GridModels;
 using StudentDorms.Models.SearchModels;
+using StudentDorms.Models.ViewModels;
 using StudentDorms.Services.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using static StudentDorms.Data.Interfaces.IProcedureRepository;
 
 namespace StudentDorms.Services.Implementations
@@ -72,15 +71,14 @@ namespace StudentDorms.Services.Implementations
             }
 
                var studentDorm = _studentDormRepository.GetById(studentDormCreateUpdateModel.Id);
-
-            if (studentDorm == null)
+                            if (studentDorm == null)
             {
                 throw new StudentDormsException("Не постои запис за студентски дом во база");
             }
-
+            
             studentDorm.Order = studentDormCreateUpdateModel.Order;
             studentDorm.Name = studentDormCreateUpdateModel.Name;
-
+            
             _studentDormRepository.Update(studentDorm);
 
         }
@@ -100,6 +98,28 @@ namespace StudentDorms.Services.Implementations
             else _studentDormRepository.DeleteById(id);
         }
 
+        public StudentDormCreateUpdateModel GetStudentDormById(int studentDormId)
+        {
+            var studentDorm = _studentDormRepository.GetById(studentDormId);
+            if (studentDorm == null)
+            {
+                throw new StudentDormsException("За студентски дом со даденотo id нема запис");
+            }
+            var result = studentDorm.ToDomain<StudentDormCreateUpdateModel, StudentDorm>();
+            return result;
+        }
 
-    }
+        public List<DropdownViewModel<int>> GetStudentDormsForDropdown()
+        {
+            var dorms = _studentDormRepository.GetAll();
+            if (dorms == null)
+            {
+                return new List<DropdownViewModel<int>>();
+            }
+
+            var result = dorms.Select(x => x.ToModel<DropdownViewModel<int>, StudentDorm>()).ToList();
+            return result;
+        }
+    
+}
 }

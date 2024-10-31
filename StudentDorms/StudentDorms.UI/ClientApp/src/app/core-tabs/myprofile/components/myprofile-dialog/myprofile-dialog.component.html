@@ -1,0 +1,34 @@
+<div>
+  <h3>Гласај за оброци</h3>
+  <div>{{ weekRange.start }} - {{ weekRange.end }}</div> 
+  <div>Краен рок за гласање: {{ deadlineDate }}</div> 
+
+  <div>
+    <button class="mat-raised-button mat-primary okModal" (click)="save()">Зачувај</button>
+    <button class="mat-raised-button closeModal" (click)="close()">Затвори</button>
+  </div>
+  <div *ngFor="let day of weekDays" class="col-md-2 card">
+    <div class="card-body">
+      <h3>{{ day.name }}</h3>
+      <h4>{{ day.date }}</h4>
+  
+      <label for="breakfast">Доручек</label>
+      <select class="form-control" [(ngModel)]="day.breakfast.id">
+               <option *ngFor="let option of meals[MealCategoryId.breakfast]" [value]="option.id">{{ option.title }}</option>
+      </select>
+  
+      <label for="lunch">Ручек</label>
+      <select class="form-control" [(ngModel)]="day.lunch.id">
+        
+        <option *ngFor="let option of meals[MealCategoryId.lunch]" [value]="option.id">{{ option.title }}</option>
+      </select>
+  
+      <label for="dinner">Вечера</label>
+      <select class="form-control" [(ngModel)]="day.dinner.id">
+                <option *ngFor="let option of meals[MealCategoryId.dinner]" [value]="option.id">{{ option.title }}</option>
+      </select>
+    </div>
+  </div>
+  
+</div>
+

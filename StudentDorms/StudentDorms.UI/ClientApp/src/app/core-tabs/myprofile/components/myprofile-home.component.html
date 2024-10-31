@@ -1,0 +1,93 @@
+<div *ngIf="profile && profile.data.length" class="container">
+    <h2 class="mb-4">Мој профил</h2>
+  
+    <div class="row">
+      <div class="col-md-2">
+        <strong>Име и презиме</strong><br>
+        {{ profile.data[0]?.fullName }}
+      </div>
+      <div class="col-md-3">
+        <strong>Емаил</strong><br>
+        {{ profile.data[0]?.email }}
+      </div>
+      <div class="col-md-2">
+        <strong>Корисничко име</strong><br>
+        {{ profile.data[0]?.username }}
+      </div>
+      <div class="col-md-2">
+        <strong>Пол</strong><br>
+        {{ profile.data[0]?.gender }}
+      </div>
+      <div class="col-md-2">
+        <strong>Активен</strong><br>
+        {{ profile.data[0]?.active ? 'Да' : 'Не' }}
+      </div>
+    </div>
+  
+    <div class="row mt-3">
+      <div class="col-md-3">
+        <strong>Студентски дом</strong><br>
+        {{ profile.data[0]?.studentDorm }}
+      </div>
+      <div class="col-md-2">
+        <strong>Блок</strong><br>
+        {{ profile.data[0]?.block }}
+      </div>
+      <div class="col-md-2">
+        <strong>Соба</strong><br>
+        <strong>{{ profile.data[0]?.room }}</strong>
+      </div>
+    </div>
+  </div>
+
+<hr>
+<nav mat-tab-nav-bar>
+   
+    <span *ngFor="let link of routeLinks; let i = index">
+        <a mat-tab-link routerLink='{{link.routerLink}}' (click)="setActiveTab(i)"
+        routerLinkActive="{{link.routerLinkActive}}"  [active]="link.isActive">{{link.title}}</a>
+        
+    </span>
+  </nav> 
+
+
+<hr>
+<div class="container">
+  <h2>Оброци</h2>
+  <div class="form-group" >
+      <label for="week-range">Недела</label>
+      <input type="text" id="week-range" class="form-control" [value]="weekRange.start + ' - ' + weekRange.end" disabled>
+       
+</div>
+
+
+      <button mat-icon-button color="primary" (click)="openDialog()">
+          <mat-icon>add</mat-icon>
+      </button>
+
+<!-- <div  class="col-5">                  
+<div  *ngFor="let day of weekDays" >
+                  <h2 class="text-center">{{ day.name }} ({{ day.date | date: 'dd.MM.yyyy' }})</h2>
+                  <p>Доручек: {{ day.breakfast || 'Нема податоци' }} 
+                      ({{ day.breakfastPercent || 0 }}%)</p>
+                  <p>Ручек: {{ day.lunch || 'Нема податоци' }} 
+                      ({{ day.lunchPercent || 0 }}%)</p>
+                  <p>Вечера: {{ day.dinner || 'Нема податоци' }} 
+                      ({{ day.dinnerPercent || 0 }}%)</p>
+              </div>
+          
+</div> -->
+</div>
+
+<div class="row">
+  <div class="col-md-1" *ngFor="let day of weekDays">
+      <h2 class="text-center">{{ day.name }} ({{ day.date | date: 'dd.MM.yyyy' }})</h2>
+                  <p>Доручек: {{ day.breakfast || 'Нема податоци' }} 
+                      ({{ day.breakfastPercent || 0 }}%)</p>
+                  <p>Ручек: {{ day.lunch || 'Нема податоци' }} 
+                      ({{ day.lunchPercent || 0 }}%)</p>
+                  <p>Вечера: {{ day.dinner || 'Нема податоци' }} 
+                      ({{ day.dinnerPercent || 0 }}%)</p>
+  </div>
+</div>
+  

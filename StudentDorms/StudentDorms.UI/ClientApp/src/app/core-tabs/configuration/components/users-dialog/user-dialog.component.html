@@ -1,0 +1,92 @@
+<div class="card">
+</div>
+<div class="card-body">
+    <div>
+        <mat-toolbar color="primary">
+            <p>{{label}}</p>
+        </mat-toolbar>
+    </div>
+    <br>
+    <br>
+    <form [formGroup]="userUpdateForm">
+        <div class="form-group row mb-2">
+            <div>
+                <div>
+                    <mat-form-field>
+                        <input matInput class="form-control" type="text" placeholder="Име" formControlName="firstName"/>
+                        <mat-error *ngIf="userUpdateForm.get('firstName').invalid && userUpdateForm.get('firstName').touched">
+                            {{getErrorMessage(userUpdateForm.get('firstName'))}}</mat-error>       
+                    </mat-form-field>
+                </div>
+                <div>
+                    <mat-form-field>
+                        <input matInput class="form-control" type="text" placeholder="Презиме" formControlName="lastName"/>
+                        <mat-error *ngIf="userUpdateForm.get('lastName').invalid && userUpdateForm.get('lastName').touched">
+                            {{getErrorMessage(userUpdateForm.get('lastName'))}}</mat-error>       
+                    </mat-form-field>
+                </div>
+                <div >
+                    <mat-form-field >
+                        <mat-label>Пол</mat-label>
+                        <mat-select formControlName="gender" [compareWith]="compareFn">
+                            <mat-option *ngFor="let gen of genders" [value]="gen">
+                                {{ gen.title }}
+                            </mat-option>
+                        </mat-select>
+                        <mat-error *ngIf="userUpdateForm.get('gender').invalid && userUpdateForm.get('gender').touched">
+                            {{getErrorMessage(userUpdateForm.get('gender'))}}
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+
+                <div >
+                    <mat-form-field >
+                        <mat-label>Улоги</mat-label>
+                        <mat-select formControlName="selectedRoles" multiple [compareWith]="compareFn">
+                            <mat-option *ngFor="let role of roles; let i =index" [value]="role">
+                                {{ role.title}}
+                            </mat-option>
+                        </mat-select>
+                        <mat-error *ngIf="userUpdateForm.get('selectedRoles').invalid && userUpdateForm.get('selectedRoles').touched">
+                            {{getErrorMessage(userUpdateForm.get('selectedRoles'))}}
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+            
+                <div> 
+                    <mat-form-field>
+                        <input matInput class="form-control" type="string" placeholder="Корисничко име" formControlName="username" value="dataSource?.username"/>
+                        <mat-error *ngIf="userUpdateForm.get('username').invalid && userUpdateForm.get('username').touched">
+                            {{getErrorMessage(userUpdateForm.get('username'))}}</mat-error>                       
+                        <mat-error *ngIf="userUpdateForm.get('username').hasError('negativeDuration') && (userUpdateForm.get('username').dirty || userUpdateForm.get('username').touched)">            
+                            Бројот мора да e позитивен</mat-error>
+                    </mat-form-field>
+                </div>
+                
+                <div> 
+                    <mat-form-field>
+                        <input matInput class="form-control" type="string" placeholder="Емаил" formControlName="email" value="dataSource?.email"/>
+                        <mat-error *ngIf="userUpdateForm.get('email').invalid && userUpdateForm.get('email').touched">
+                            {{getErrorMessage(userUpdateForm.get('email'))}}</mat-error>                       
+                        <mat-error *ngIf="userUpdateForm.get('email').hasError('negativeDuration') && (userUpdateForm.get('email').dirty || userUpdateForm.get('email').touched)">            
+                            Бројот мора да e позитивен</mat-error>
+                    </mat-form-field>
+                </div>
+                <div>
+                    <mat-checkbox formControlName="checkboxActive" color="primary">
+                        Active
+                    </mat-checkbox>
+                    <mat-error *ngIf="userUpdateForm.get('checkboxActive').invalid && userUpdateForm.get('checkboxActive').touched">
+                        {{ getErrorMessage(userUpdateForm.get('checkboxActive')) }}
+                    </mat-error>
+                </div>
+
+
+            </div>
+        </div>
+    </form>
+    <mat-dialog-actions class="materialModalActions">
+        <button class="mat-raised-button mat-primary okModal" [disabled]="userUpdateForm.invalid" (click)="save()">Зачувај</button>
+        <button class="mat-raised-button closeModal" (click)="close()">Затвори</button>
+    </mat-dialog-actions>
+</div>

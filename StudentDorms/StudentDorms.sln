@@ -43,6 +43,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StudentDorms.Settings", "St
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StudentDorms.Middlewares", "StudentDorms.Middlewares\StudentDorms.Middlewares.csproj", "{F1BAC3D3-1CC4-4F7A-8272-ABEB84F49A47}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tools", "Tools", "{72502C65-6418-4D7C-BC75-76DE75733AE8}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StudentDorms.AccommodationsGenerator", "GenerateAccommodationsForYearConsoleAplication\StudentDorms.AccommodationsGenerator.csproj", "{19DA0D0B-C186-4DFF-9FE7-A460979E9E3A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -101,6 +105,10 @@ Global
 		{F1BAC3D3-1CC4-4F7A-8272-ABEB84F49A47}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F1BAC3D3-1CC4-4F7A-8272-ABEB84F49A47}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F1BAC3D3-1CC4-4F7A-8272-ABEB84F49A47}.Release|Any CPU.Build.0 = Release|Any CPU
+		{19DA0D0B-C186-4DFF-9FE7-A460979E9E3A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{19DA0D0B-C186-4DFF-9FE7-A460979E9E3A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{19DA0D0B-C186-4DFF-9FE7-A460979E9E3A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{19DA0D0B-C186-4DFF-9FE7-A460979E9E3A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -119,6 +127,7 @@ Global
 		{1D33DEEB-C3C6-42AF-BFE3-FCD36FC67D4D} = {636678FB-829C-4834-8CC3-6C5172F3E8AD}
 		{1CA826B4-AE99-4D1F-BB31-07795DB87F72} = {636678FB-829C-4834-8CC3-6C5172F3E8AD}
 		{F1BAC3D3-1CC4-4F7A-8272-ABEB84F49A47} = {636678FB-829C-4834-8CC3-6C5172F3E8AD}
+		{19DA0D0B-C186-4DFF-9FE7-A460979E9E3A} = {72502C65-6418-4D7C-BC75-76DE75733AE8}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {FF4D8354-D7F7-4591-BADE-5D0A84F3B318}

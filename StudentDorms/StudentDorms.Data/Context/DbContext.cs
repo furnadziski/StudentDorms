@@ -26,6 +26,8 @@ namespace StudentDorms.Data.Context
         public DbSet<RoomGridModel> RoomGridModel {get; set;}
         public DbSet<MealCategoryGridModel> MealCategoryGridModel { get; set;}
         public DbSet<MealGridModel> MealGridModel { get; set;}
+        public DbSet<MealVoteGridModel> MealVoteGridModel { get; set;}
+        public DbSet<MyProfileGridModel> MyProfileGridModel { get; set;}
         public DbSet<AccommodationGridModel> AccommodationGridModel { get; set;}
         public DbSet<ScalarString> ScalarString { get; set;}
 
@@ -62,7 +64,9 @@ namespace StudentDorms.Data.Context
             modelBuilder.Entity<RoomGridModel>().HasNoKey();
             modelBuilder.Entity<MealCategoryGridModel>().HasNoKey();
             modelBuilder.Entity<MealGridModel>().HasNoKey();
+            modelBuilder.Entity<MealVoteGridModel>().HasNoKey();
             modelBuilder.Entity<AccommodationGridModel>().HasNoKey();
+            modelBuilder.Entity<MyProfileGridModel>().HasNoKey();
             modelBuilder.Entity<ScalarString>().HasNoKey();
 
 

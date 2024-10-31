@@ -2,6 +2,7 @@
 using StudentDorms.Models.CreateUpdateModels;
 using StudentDorms.Models.GridModels;
 using StudentDorms.Models.SearchModels;
+using StudentDorms.Models.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -64,5 +65,31 @@ namespace StudentDorms.Services.Interfaces
         /// <param name="filterMealVotingSearchModel"></param>
         /// <returns>прикажувањена модел за гласање за оборци<</returns>
         public WeeklyMealsVoting FilterMealVoting(FilterMealVotingSearchModel filterMealVotingSearchModel);
+
+
+        /// <summary>
+        /// Метод зa прикажување на гласање за оборци
+        /// </summary>
+        /// <param name="mealVoteGridModels"></param>
+        /// <returns>прикажувањена модел за изгласани оборци<</returns>
+        public void SaveMealVote(List<MealVoteGridModel> mealVoteGridModels);
+
+        /// <summary>
+        /// Метод зa прикажување на категории на оборци
+        /// </summary>
+        /// <returns>прикажување на категории на оборци<</returns>
+        public List<DropdownViewModel<int>> GetMealCategoriesForDropdown();
+        /// <summary>
+        /// Метод зa прикажување  на оборци
+        /// </summary>
+        /// <returns>прикажување на  оборци<</returns>
+        public List<DropdownViewModel<int>> GetMealsForDropdown(int id);
+
+        /// <summary>
+        /// Метод зa прикажување на оборк
+        /// </summary>
+        /// <param name="mealid"></param>
+        /// <returns>прикажување на оборк<</returns>
+        public MealViewModel GetMealById(int mealid);
     }
 }
